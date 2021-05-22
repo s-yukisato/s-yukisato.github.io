@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>My first three.js app</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
+	<style>
+		body {
+			margin: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="js/three.js"></script>
+	<script>
+
+		function init() {
+			// シーンを作成
+			const scene = new THREE.Scene();
+			// カメラを作成
+			const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setClearColor(new THREE.Color(0xeeeeee));
+			// ウィンドウズに合わせる
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			// 影の有効化
+			renderer.shadowMap.enabled = true;
+			// レンダリング
+			document.body.appendChild(renderer.domElement);
+
+			var spotLight = new THREE.SpotLight(0xffffff);
+			spotLight.position.set(-20, 40, -10);
+			// 影の発生源
+			spotLight.castShadow = true;
+			// シーンに追加
+			scene.add(spotLight);
+			// 軸の作成
+			const axes = new THREE.AxisHelper(20);
+			scene.add(axes);
+
+			// 地面
+			const plane = createPlane();
+			// 影を落とされる物体
+			plane.receiveShadow = true;
+			scene.add(plane);
+
+			// オブジェクトの配置
+			let obj_position = {
+				x: -10,
+				y: 1,
+				z: -5
+			}
+			// オブジェクトを作成する関数
+			const createFunc = {
+				cube: createCube,
+				sphere: createSphere,
+				cone: createCone,
+				cylinder: createCylinder,
+				torus: createTorus,
+				torusKnot: createTorusKnot
+			}
+			// アニメーション用
+			const objects = [];
+
+			Object.keys(createFunc).forEach(type => {
+				obj_position.z = -5;
+				const obj = createFunc[type](obj_position)
+				scene.add(obj);
+				// 重ならないように前方向に移動
+				obj_position.z = 5;
+				const wireframe_obj = createFunc[type](obj_position, wireframe = true);
+				scene.add(wireframe_obj);
+				obj_position.x += 7;
+				// アニメーション用にオブジェクトを格納
+				objects.push(obj, wireframe_obj)
+			})
+
+			camera.position.x = -15;
+			camera.position.y = 20;
+			camera.position.z = 30;
+			camera.lookAt(scene.position)
+
+			// 初回実行
+			var update = function () {
+				requestAnimationFrame(update);
+
+				// 箱を回転させる
+				objects.forEach(object => {
+					object.rotation.x += 0.01;
+					object.rotation.y += 0.01;
+				})
+
+				renderer.render(scene, camera);
+			};
+			update();
+		};
+		window.onload = init;
+
+		function createPlane(width = 60, height = 20, color = 0xcccccc) {
+			const planeGeometry = new THREE.PlaneGeometry(width, height, 1, 1);
+			const planeMaterial = new THREE.MeshLambertMaterial({ color });
+			const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+
+			plane.rotation.x = -0.5 * Math.PI;
+			plane.position.x = 15;
+			plane.position.y = -2;
+
+			return plane;
+		}
+
+		function createCube(position, wireframe = false, color = 0x00ff00) {
+			var cubeGeometry = new THREE.BoxGeometry(3, 3, 3, 16, 16);
+			var cubeMaterial = new THREE.MeshLambertMaterial({ color, wireframe });
+			var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);			
+			cube.castShadow = true;
+			cube.position.set(position.x, position.y, position.z)
+
+			return cube
+		}
+
+		function createSphere(position, wireframe = false, color = 0x00ffff) {
+			var radius = 2;
+			var sphereGeometry = new THREE.SphereGeometry(2, 16, 16);
+			//半径、垂直方向の分割数、水平方向の分割数
+			var sphereMaterial = new THREE.MeshPhongMaterial({ color, wireframe });
+			var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+			sphere.castShadow = true;
+			sphere.position.set(position.x, position.y, position.z);
+
+			return sphere
+		}
+
+		function createCone(position, wireframe = false, color = 0xfa8072) {
+			var radius = 2;
+			var height = 5;
+			var division = 5;
+			//角すい〜円すい
+			//半径、高さ、底面の分割数
+			var coneGeometry = new THREE.ConeGeometry(radius, height, division, 16);
+			var coneMaterial = new THREE.MeshPhongMaterial({ color,  wireframe });
+			var cone = new THREE.Mesh(coneGeometry, coneMaterial);
+			cone.castShadow = true;
+			cone.position.set(position.x, position.y, position.z);
+
+			return cone
+		}
+
+
+		function createCylinder(position, wireframe = false, color = 0x8a2be2) {
+			var top_radius = 2;
+			var buttom_radius = 2;
+			var height = 5;
+			var prism = 10;
+			//角柱〜円柱
+			var cylinderGeometry = new THREE.CylinderGeometry(top_radius, buttom_radius, height, prism, 16);
+			//上の底面の半径、下の底面の半径、高さ、何角柱か
+			var cylinderMaterial = new THREE.MeshPhongMaterial({ color, wireframe });
+			var cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
+			cylinder.castShadow = true;
+			cylinder.position.set(position.x, position.y, position.z);
+
+			return cylinder
+		}
+
+		function createTorus(position, wireframe = false, color = 0xff8c00) {
+			//ドーナッツ
+			var torusGeometry = new THREE.TorusGeometry(2, 1.0, 6, 12, 16, 16);
+			//半径、ドーナッツの太さ、ドーナッツのチューブ方向の分割数、水平方向の分割数
+			var torusMaterial = new THREE.MeshLambertMaterial({ color, wireframe });
+			var torus = new THREE.Mesh(torusGeometry, torusMaterial);
+			torus.castShadow = true;
+			torus.position.set(position.x, position.y, position.z);
+
+			return torus
+		}
+
+		function createTorusKnot(position, wireframe = false, color = 0xffff00) {
+			//なんかクネクネしてるやつ
+			var torusKnotGeometry = new THREE.TorusKnotGeometry(2, 1.0, 50, 6, 5, 2);
+			//全体的な大きさ、チューブの太さ、クネクネの進む方向に対して何分割するか、
+			//チューブ方向に対して何分割するか、残りの二つの数字を変えるとクネクネの形が変わる
+			var torusKnotMaterial = new THREE.MeshPhongMaterial({ color, wireframe });
+			var torusKnot = new THREE.Mesh(torusKnotGeometry, torusKnotMaterial);
+			torusKnot.castShadow = true;
+			torusKnot.position.set(position.x, position.y, position.z);
+
+			return torusKnot
+		}
+
+	</script>
+</body>
+
+</html>
