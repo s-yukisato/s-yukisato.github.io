@@ -47,7 +47,8 @@
       mat.bumpscale = 0.5;
 
       // 箱を作成
-      var geometry = new THREE.BoxGeometry(200, 200, 200);
+      // var geometry = new THREE.BoxGeometry(200, 200, 200);
+      var geometry = new THREE.SphereGeometry(300, 30, 30);
       //var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
       //var box = new THREE.Mesh(geometry, material);
       var box = new THREE.Mesh(geometry, mat);
