@@ -12,6 +12,7 @@
   <script src="../lesson4/OrbitControls.js"></script>
   <script>
     window.addEventListener('load', init);
+
     var init = function () {
       // サイズを指定
       const width = 960;
@@ -46,21 +47,21 @@
       mat.bumpscale = 0.5;
 
       // 箱を作成
-      var geometry = new THREE.BoxGeometry(1, 1, 1);
+      var geometry = new THREE.BoxGeometry(10, 10, 10);
       //var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
       //var box = new THREE.Mesh(geometry, material);
       var box = new THREE.Mesh(geometry, mat);
-      box.position.z = -5;
+      box.position.set(0,0,0);
       scene.add(box);
 
       // 平行光源1
       var directionalLight1 = new THREE.DirectionalLight(0xffffff);
-      directionalLight1.position.set(1, 1, 1);
+      directionalLight1.position.set(100, 100, 100);
       // シーンに追加
       scene.add(directionalLight1);
       // 平行光源2
       var directionalLight2 = new THREE.DirectionalLight(0xffffff);
-      directionalLight2.position.set(-1, 1, 1);
+      directionalLight2.position.set(-100, 100, 100);
       // シーンに追加
       scene.add(directionalLight2);
 
@@ -77,6 +78,7 @@
       // update();
 
       tick();
+
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         // レンダリング
