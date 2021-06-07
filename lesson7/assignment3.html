@@ -20,7 +20,8 @@
 
       // レンダラーを作成
       const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#myCanvas')
+        canvas: document.querySelector('#myCanvas'),
+        // alpha: true
       });
       renderer.setSize(width, height);
       renderer.setClearColor(0xffffff);
@@ -66,6 +67,9 @@
       directionalLight2.position.set(-100, 100, 100);
       // シーンに追加
       scene.add(directionalLight2);
+
+      const bgTexture = loader.load("https://s-yukisato.github.io/img/sky_00165.jpg")
+      scene.background = 
 
       // // 初回実行
       // var update = function() {
