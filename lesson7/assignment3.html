@@ -13,7 +13,7 @@
   <script>
     window.addEventListener('load', init);
 
-    var init = function () {
+    function init() {
       // サイズを指定
       const width = 960;
       const height = 540;
@@ -25,7 +25,7 @@
       renderer.setSize(width, height);
 
       // シーンを作成
-      var scene = new THREE.Scene();
+      const scene = new THREE.Scene();
 
       // カメラを作成
       const camera = new THREE.PerspectiveCamera(45, width / height);
@@ -44,15 +44,15 @@
       // バンプマップ読み込み
       var bump = textureLoader.load("https://s-yukisato.github.io/img/stone-bump.jpg");
       mat.bumpMap = bump;
-      mat.bumpscale = 0.5;
+      mat.bumpscale = 0.2;
 
       // 箱を作成
-      // var geometry = new THREE.BoxGeometry(200, 200, 200);
-      var geometry = new THREE.SphereGeometry(300, 30, 30);
+      var geometry = new THREE.BoxGeometry(300, 300, 300);
+      // var geometry = new THREE.SphereGeometry(300, 30, 30);
       //var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
       //var box = new THREE.Mesh(geometry, material);
       var box = new THREE.Mesh(geometry, mat);
-      box.position.set(0,0,0);
+      // box.position.set(0,0,0);
       scene.add(box);
 
       // 平行光源1
