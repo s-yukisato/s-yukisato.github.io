@@ -72,12 +72,6 @@
         sprite1.scale.set(100,100,100);
         scene.add(sprite1);
 
-        sprite1.position.x = 50;
-        sprite1.position.y = 50;
-        sprite1.position.z = -100;
-        sprite1.scale.set(100,100,100);
-        scene.add(sprite1);
-
         // 木1をスプライトで作成 
         var texture2 = textureLoader.load("img/tree2.png");
         const material2 = new THREE.SpriteMaterial({ map: texture2,});
@@ -88,6 +82,16 @@
         sprite2.position.z = -100;
         sprite2.scale.set(100,100,100);
         scene.add(sprite2);
+
+        const texture_people = textureLoader.load("https://s-yukisato.github.io/img/yokokara_shiturei.png");
+        const material_people = new THREE.SpriteMaterial({ map: texture_people });
+
+        const sprite_people = new THREE.Sprite(material_people);
+        sprite2.position.x = 33;
+        sprite2.position.y = 33;
+        sprite2.position.z = 33;
+        sprite2.scale.set(100,100,100);
+        scene.add(sprite_people);
 
         tick();
         // 毎フレーム時に実行されるループイベントです
