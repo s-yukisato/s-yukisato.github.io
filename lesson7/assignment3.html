@@ -46,13 +46,10 @@
       // バンプマップ読み込み
       var bump = textureLoader.load("https://s-yukisato.github.io/img/stone-bump.jpg");
       mat.bumpMap = bump;
-      mat.bumpscale = 0.2;
+      mat.bumpscale = 0.7;
 
       // 箱を作成
       var geometry = new THREE.BoxGeometry(300, 300, 300);
-      // var geometry = new THREE.SphereGeometry(300, 30, 30);
-      //var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
-      //var box = new THREE.Mesh(geometry, material);
       var box = new THREE.Mesh(geometry, mat);
       // box.position.set(0,0,0);
       scene.add(box);
@@ -80,6 +77,7 @@
       light(100, 100, 100)
       light(-100, 100, 100)
       light(100, -100, -100)
+      light(-100, -100, -100)
 
       function light(x, y, z) {
         // 平行光源
@@ -92,20 +90,7 @@
       const bgTexture = textureLoader.load("https://s-yukisato.github.io/img/sky_00165.jpg")
       scene.background = bgTexture
 
-      // // 初回実行
-      // var update = function() {
-      //   requestAnimationFrame(update);
-
-      //   // 箱を回転させる
-      //   box.rotation.x += 0.01;
-      //   box.rotation.y += 0.01;
-
-      //   renderer.render(scene, camera);
-      // };
-      // update();
-
       tick();
-
       // 毎フレーム時に実行されるループイベントです
       function tick() {
         // レンダリング
@@ -115,9 +100,7 @@
     }
   </script>
 </head>
-
 <body>
   <canvas id="myCanvas"></canvas>
 </body>
-
 </html>
