@@ -57,26 +57,37 @@
       // box.position.set(0,0,0);
       scene.add(box);
 
-      // 平行光源1
-      var directionalLight1 = new THREE.DirectionalLight(0xffffff);
-      directionalLight1.position.set(100, 100, 100);
-      // シーンに追加
-      scene.add(directionalLight1);
-      // 平行光源2
-      var directionalLight2 = new THREE.DirectionalLight(0xffffff);
-      directionalLight2.position.set(-100, 100, 100);
-      // シーンに追加
-      scene.add(directionalLight2);
-      // 平行光源3
-      var directionalLight3 = new THREE.DirectionalLight(0xffffff);
-      directionalLight3.position.set(100, -100, 100);
-      // シーンに追加
-      scene.add(directionalLight3);
-      // 平行光源4
-      var directionalLight4 = new THREE.DirectionalLight(0xffffff);
-      directionalLight4.position.set(-100, -100, 100);
-      // シーンに追加
-      scene.add(directionalLight4);
+      // // 平行光源1
+      // var directionalLight1 = new THREE.DirectionalLight(0xffffff);
+      // directionalLight1.position.set(100, 100, 100);
+      // // シーンに追加
+      // scene.add(directionalLight1);
+      // // 平行光源2
+      // var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+      // directionalLight2.position.set(-100, 100, 100);
+      // // シーンに追加
+      // scene.add(directionalLight2);
+      // // 平行光源3
+      // var directionalLight3 = new THREE.DirectionalLight(0xffffff);
+      // directionalLight3.position.set(100, -100, 100);
+      // // シーンに追加
+      // scene.add(directionalLight3);
+      // // 平行光源4
+      // var directionalLight4 = new THREE.DirectionalLight(0xffffff);
+      // directionalLight4.position.set(-100, -100, 100);
+      // // シーンに追加
+      // scene.add(directionalLight4);
+      light(100, 100, 100)
+      light(-100, 100, 100)
+      light(100, -100, -100)
+
+      function light(x, y, z) {
+        // 平行光源
+        var directionalLight = new THREE.DirectionalLight(0xffffff);
+        directionalLight.position.set(x, y, z);
+        // シーンに追加
+        scene.add(directionalLight);
+      }
 
       const bgTexture = textureLoader.load("https://s-yukisato.github.io/img/sky_00165.jpg")
       scene.background = bgTexture
