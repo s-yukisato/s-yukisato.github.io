@@ -3,11 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>sample_bump</title>
-
-  <!-- three.jsを読み込む(ローカル) -->
-  <!-- <script src="./three.js"></script> -->
-  <!-- three.jsを読み込む(CDN) -->
+  <title>OrbitControls</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
   <script src="https://s-yukisato.github.io/lesson4/OrbitControls.js"></script>
   <script>
@@ -21,10 +17,10 @@
       // レンダラーを作成
       const renderer = new THREE.WebGLRenderer({
         canvas: document.querySelector('#myCanvas'),
-        // alpha: true
+        setSize(width, height)
       });
-      renderer.setSize(width, height);
-      renderer.setClearColor(0xffffff);
+      // renderer.setSize(width, height);
+      // renderer.setClearColor(0xffffff);
 
       // シーンを作成
       const scene = new THREE.Scene();
@@ -39,7 +35,7 @@
 
       // テクスチャー読み込み
       var textureLoader = new THREE.TextureLoader();
-      var texture = textureLoader.load("https://s-yukisato.github.io/img/fire_00039.jpg");
+      var texture = textureLoader.load("https://s-yukisato.github.io/img/stone.jpg");
       var mat = new THREE.MeshPhongMaterial();
       mat.map = texture;
 
@@ -51,29 +47,8 @@
       // 箱を作成
       var geometry = new THREE.BoxGeometry(300, 300, 300);
       var box = new THREE.Mesh(geometry, mat);
-      // box.position.set(0,0,0);
       scene.add(box);
 
-      // // 平行光源1
-      // var directionalLight1 = new THREE.DirectionalLight(0xffffff);
-      // directionalLight1.position.set(100, 100, 100);
-      // // シーンに追加
-      // scene.add(directionalLight1);
-      // // 平行光源2
-      // var directionalLight2 = new THREE.DirectionalLight(0xffffff);
-      // directionalLight2.position.set(-100, 100, 100);
-      // // シーンに追加
-      // scene.add(directionalLight2);
-      // // 平行光源3
-      // var directionalLight3 = new THREE.DirectionalLight(0xffffff);
-      // directionalLight3.position.set(100, -100, 100);
-      // // シーンに追加
-      // scene.add(directionalLight3);
-      // // 平行光源4
-      // var directionalLight4 = new THREE.DirectionalLight(0xffffff);
-      // directionalLight4.position.set(-100, -100, 100);
-      // // シーンに追加
-      // scene.add(directionalLight4);
       light(100, 100, 100)
       light(-100, 100, 100)
       light(100, -100, -100)
