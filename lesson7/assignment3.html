@@ -46,6 +46,7 @@
       // ノーマルマップ
       var normalTexture = textureLoader.load('https://s-yukisato.github.io/img/fire-bump.jpg');
       mat.normalMap = normalTexture
+      mat.normalScale = new THREE.Vector2( 1, -1)
 
       // 箱を作成
       var geometry = new THREE.BoxGeometry(300, 300, 300);
