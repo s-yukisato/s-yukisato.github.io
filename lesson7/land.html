@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OrbitControls</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
+    <script src="https://s-yukisato.github.io/lesson4/OrbitControls.js"></script>
+    <script>
+        window.addEventListener('load', init);
+
+        function init() {
+            // サイズを指定
+            const width = 960;
+            const height = 540;
+
+            // レンダラーを作成
+            const renderer = new THREE.WebGLRenderer({
+                canvas: document.querySelector('#myCanvas'),
+            });
+            renderer.setSize(width, height);
+            // renderer.setClearColor(0xffffff);
+
+            // シーンを作成
+            const scene = new THREE.Scene();
+
+            // カメラを作成
+            const camera = new THREE.PerspectiveCamera(45, width / height);
+            // カメラの初期座標を設定
+            camera.position.set(0, 0, 1000);
+
+            // カメラコントローラーを作成
+            const controls = new THREE.OrbitControls(camera, document.body);
+
+            // テクスチャー読み込み
+            var textureLoader = new THREE.TextureLoader();
+            var texture = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg");
+            var mat = new THREE.MeshPhongMaterial();
+            mat.map = texture;
+
+            // バンプマップ読み込み
+            var bump = textureLoader.load("https://s-yukisato.github.io/img/tone-bump.jpg");
+            mat.bumpMap = bump;
+            mat.bumpScale = 0.05;
+
+            // // ノーマルマップ
+            // var normalTexture = textureLoader.load('https://s-yukisato.github.io/img/fire-bump.jpg');
+            // mat.normalMap = normalTexture
+            // mat.normalScale = new THREE.Vector2( 1, -1)
+
+            // 地面
+            const plane = createPlane()
+            scene.add(plane)
+
+            // // 箱を作成
+            // var geometry = new THREE.BoxGeometry(300, 300, 300);
+            // var box = new THREE.Mesh(geometry, mat);
+            // scene.add(box);
+
+            light(100, 100, 100)
+            light(-100, 100, 100)
+            light(100, -100, -100)
+            light(-100, -100, -100)
+
+            function light(x, y, z) {
+                // 平行光源
+                var directionalLight = new THREE.DirectionalLight(0xffffff);
+                directionalLight.position.set(x, y, z);
+                // シーンに追加
+                scene.add(directionalLight);
+            }
+
+            const bgTexture = textureLoader.load("https://s-yukisato.github.io/img/sky_00165.jpg")
+            scene.background = bgTexture
+
+            tick();
+            // 毎フレーム時に実行されるループイベントです
+            function tick() {
+                // レンダリング
+                renderer.render(scene, camera);
+                requestAnimationFrame(tick);
+            }
+        }
+
+        function createPlane(mat, width = 60, height = 20, color = 0xcccccc) {
+            const planeGeometry = new THREE.PlaneGeometry(width, height, 1, 1);
+            const planeMaterial = new THREE.MeshPhongMaterial({ color });
+            const plane = new THREE.Mesh(planeGeometry, mat);
+
+            plane.rotation.x = -0.5 * Math.PI;
+            plane.position.x = 15;
+            plane.position.y = -3;
+
+            return plane;
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="myCanvas"></canvas>
+</body>
+
+</html>
