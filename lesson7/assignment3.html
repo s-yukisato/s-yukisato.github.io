@@ -34,12 +34,12 @@
 
       // テクスチャー読み込み
       var textureLoader = new THREE.TextureLoader();
-      var texture = textureLoader.load("https://s-yukisato.github.io/img/human.jpg");
+      var texture = textureLoader.load("https://s-yukisato.github.io/img/fire_00039.jpg");
       var mat = new THREE.MeshPhongMaterial();
       mat.map = texture;
 
       // バンプマップ読み込み
-      var bump = textureLoader.load("https://s-yukisato.github.io/img/human.jpg");
+      var bump = textureLoader.load("https://s-yukisato.github.io/img/fire-bump.jpg");
       mat.bumpMap = bump;
       mat.bumpscale = 0.7;
 
