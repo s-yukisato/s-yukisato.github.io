@@ -66,18 +66,28 @@
             mat2.bumpMap = bump;
             mat2.bumpScale = 0.2;
 
-            // 地面
+            // floor
             const plane = createPlane(mat)
             plane.rotation.x = -0.5 * Math.PI;
-            plane.position.x = 15;
-            plane.position.y = -3;
+            plane.position.x = 0;
+            plane.position.y = 0;
             scene.add(plane)
 
-            // 地面
-            const plane2 = createPlane(mat2)
-            plane2.position.x = 15;
-            plane2.position.y = -3;
-            scene.add(plane2)
+            // wall
+            const plane_wall1 = createPlane(mat2)
+            plane_wall1.position.x = 0;
+            plane_wall1.position.y = 400;
+            plane_wall1.position.z = 200;
+            scene.add(plane_wall1)
+
+            // wall
+            const plane_wall2 = createPlane(mat2)
+            plane_wall2.rotation.y = -0.5 * Math.PI;
+            plane_wall2.position.x = 200;
+            plane_wall2.position.y = 400;
+            plane_wall2.position.z = 200;
+            scene.add(plane_wall2)
+
 
             // 箱を作成
             // var geometry = new THREE.SphereGeometry(300, 300, 300);
@@ -109,7 +119,7 @@
             }
         }
 
-        function createPlane(mat, width = 500, height = 400, color = 0xcccccc) {
+        function createPlane(mat, width = 400, height = 400, color = 0xcccccc) {
             const planeGeometry = new THREE.PlaneGeometry(width, height, 1, 1);
             const planeMaterial = new THREE.MeshPhongMaterial({ color });
             const plane = new THREE.Mesh(planeGeometry, mat);
