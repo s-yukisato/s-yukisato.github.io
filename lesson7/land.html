@@ -34,7 +34,8 @@
 
             // テクスチャー読み込み
             var textureLoader = new THREE.TextureLoader();
-            var texture = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg");
+
+            var texture = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg")
             var mat = new THREE.MeshPhongMaterial();
             mat.map = texture;
 
@@ -46,11 +47,32 @@
             // ノーマルマップ
             var normalTexture = textureLoader.load('https://s-yukisato.github.io/img/tone-normal.jpg');
             mat.normalMap = normalTexture
-            mat.normalScale = new THREE.Vector2( 1, -1)
+            mat.normalScale = new THREE.Vector2(1, -1)
+
+            // wall
+            var texture = textureLoader.load("https://s-yukisato.github.io/img/brick.jpg")
+            var mat2 = new THREE.MeshPhongMaterial();
+            mat2.map = texture;
+
+            // ノーマルマップ
+            var bump = textureLoader.load('https://s-yukisato.github.io/img/brick-bump.jpg');
+            mat2.bumpMap = bump;
+            mat2.bumpScale = 0.2;
 
             // 地面
             const plane = createPlane(mat)
             scene.add(plane)
+
+            plane.rotation.x = -0.5 * Math.PI;
+            plane.position.x = 15;
+            plane.position.y = -3;
+
+            // 地面
+            const plane2 = createPlane(mat2)
+            scene.add(plane2)
+
+            plane.position.x = 15;
+            plane.position.y = -3;
 
             // 箱を作成
             var geometry = new THREE.SphereGeometry(300, 300, 300);
@@ -86,10 +108,6 @@
             const planeGeometry = new THREE.PlaneGeometry(width, height, 1, 1);
             const planeMaterial = new THREE.MeshPhongMaterial({ color });
             const plane = new THREE.Mesh(planeGeometry, mat);
-
-            plane.rotation.x = -0.5 * Math.PI;
-            plane.position.x = 15;
-            plane.position.y = -3;
 
             return plane;
         }
