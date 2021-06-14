@@ -32,6 +32,13 @@
             // カメラコントローラーを作成
             const controls = new THREE.OrbitControls(camera, document.body);
 
+            // helper
+            const gridHelper = new THREE.GridHelper(200, 50); // size, step
+            scene.add(gridHelper);
+
+            const axisHelper = new THREE.AxisHelper(200, 50);
+            scene.add(axisHelper);
+
             // テクスチャー読み込み
             var textureLoader = new THREE.TextureLoader();
 
