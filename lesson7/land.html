@@ -61,7 +61,7 @@
             var mat2 = new THREE.MeshPhongMaterial();
             mat2.map = texture2;
 
-            // ノーマルマップ
+            // bunp
             var bump = textureLoader.load('https://s-yukisato.github.io/img/brick-bump.jpg');
             mat2.bumpMap = bump;
             mat2.bumpScale = 0.2;
@@ -80,9 +80,9 @@
             scene.add(plane2)
 
             // 箱を作成
-            var geometry = new THREE.SphereGeometry(300, 300, 300);
-            var box = new THREE.Mesh(geometry, mat);
-            scene.add(box);
+            // var geometry = new THREE.SphereGeometry(300, 300, 300);
+            // var box = new THREE.Mesh(geometry, mat);
+            // scene.add(box);
 
             light(100, 100, 100)
             light(-100, 100, 100)
