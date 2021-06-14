@@ -48,9 +48,9 @@
             mat.normalMap = normalTexture
             mat.normalScale = new THREE.Vector2( 1, -1)
 
-            // // 地面
-            // const plane = createPlane(mat)
-            // scene.add(plane)
+            // 地面
+            const plane = createPlane(mat)
+            scene.add(plane)
 
             // 箱を作成
             var geometry = new THREE.SphereGeometry(300, 300, 300);
