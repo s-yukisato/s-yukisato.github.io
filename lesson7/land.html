@@ -41,7 +41,7 @@
             // バンプマップ読み込み
             var bump = textureLoader.load("https://s-yukisato.github.io/img/tone-bump.jpg");
             mat.bumpMap = bump;
-            mat.bumpScale = 0.05;
+            mat.bumpScale = 0.5;
 
             // // ノーマルマップ
             // var normalTexture = textureLoader.load('https://s-yukisato.github.io/img/fire-bump.jpg');
@@ -82,7 +82,7 @@
             }
         }
 
-        function createPlane(mat, width = 60, height = 20, color = 0xcccccc) {
+        function createPlane(mat, width = 500, height = 400, color = 0xcccccc) {
             const planeGeometry = new THREE.PlaneGeometry(width, height, 1, 1);
             const planeMaterial = new THREE.MeshPhongMaterial({ color });
             const plane = new THREE.Mesh(planeGeometry, mat);
