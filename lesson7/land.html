@@ -63,11 +63,11 @@
             }
             scene.add(createFloor(mat, 0, 0))
             scene.add(createFloor(mat, -400, 0))
-            scene.add(createFloor(mat, -400, -400))
-            scene.add(createFloor(mat, 400, 0))
+            scene.add(createFloor(mat, -400, 400))
+            scene.add(createFloor(mat, 0, 400))
 
-            scene.add(createWall(mat2, 0, -200))
-            scene.add(createWall(mat2, 200, 0))
+            scene.add(createWall(mat2, 0, 0, -200))
+            scene.add(createWall(mat2, -0.5, 200, 0))
             
 
             // 木0をスプライトで作成
@@ -129,8 +129,9 @@
             return plane
         }
 
-        function createWall(mat, p_x, p_z){
+        function createWall(mat, r_y, p_x, p_z){
             const plane = createPlane(mat)
+            plane.rotation.y = r_y * Math.PI;
             plane.position.x = p_x;
             plane.position.y = 200;
             plane.position.z = p_z;
