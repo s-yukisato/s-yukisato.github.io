@@ -42,13 +42,32 @@
             // テクスチャー読み込み
             var textureLoader = new THREE.TextureLoader();
 
-            createFloor(0, 0)
-            createFloor(-400, 0)
-            createFloor(-400, -400)
-            createFloor(400, 0)
+            let texture = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg")
+            let mat = new THREE.MeshPhongMaterial();
+            mat.map = texture;
+            // bunp
+            let bump = textureLoader.load('https://s-yukisato.github.io/img/tone-bump.jpg');
+            mat.bumpMap = bump;
+            mat.bumpScale = 0.2;
 
-            createWall(0, -200)
-            createWall(200, 0)
+            let texture2 = textureLoader.load("https://s-yukisato.github.io/img/brick.jpg")
+            let mat2 = new THREE.MeshPhongMaterial();
+            mat2.map = texture2;
+            // bunp
+            let bump2 = textureLoader.load('https://s-yukisato.github.io/img/brick-bump.jpg');
+            mat2.bumpMap = bump2;
+            mat2.bumpScale = 0.2;
+
+            for(let i=1; i<3; i++){
+                createFloor()
+            }
+            createFloor(mat, 0, 0)
+            createFloor(mat, -400, 0)
+            createFloor(mat, -400, -400)
+            createFloor(mat, 400, 0)
+
+            createWall(mat2, 0, -200)
+            createWall(mat2, 200, 0)
             
 
             // 木0をスプライトで作成
@@ -100,14 +119,7 @@
             return plane;
         }
 
-        function createFloor(p_x, p_z) {
-            let texture = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg")
-            let mat = new THREE.MeshPhongMaterial();
-            mat.map = texture;
-            // bunp
-            let bump = textureLoader.load('https://s-yukisato.github.io/img/tone-bump.jpg');
-            mat.bumpMap = bump;
-            mat.bumpScale = 0.2;
+        function createFloor(mat, p_x, p_z) {
             // floor
             const plane = createPlane(mat)
             plane.rotation.x = -0.5 * Math.PI;
@@ -117,14 +129,7 @@
             scene.add(plane)
         }
 
-        function createWall(p_x, p_z){
-            let texture = textureLoader.load("https://s-yukisato.github.io/img/brick.jpg")
-            let mat = new THREE.MeshPhongMaterial();
-            mat.map = texture;
-            // bunp
-            let bump = textureLoader.load('https://s-yukisato.github.io/img/brick-bump.jpg');
-            mat.bumpMap = bump;
-            mat.bumpScale = 0.2;
+        function createWall(mat, p_x, p_z){
             const plane = createPlane(mat)
             plane.position.x = p_x;
             plane.position.y = 200;
