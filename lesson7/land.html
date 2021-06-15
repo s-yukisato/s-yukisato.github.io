@@ -44,19 +44,19 @@
 
             let texture = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg")
             let mat = new THREE.MeshPhongMaterial();
-            mat.map = texture;
+            // mat.map = texture;
             // bunp
             let bump = textureLoader.load('https://s-yukisato.github.io/img/tone-bump.jpg');
             mat.bumpMap = bump;
-            mat.bumpScale = 0.2;
+            mat.bumpScale = 0.5;
 
             let texture2 = textureLoader.load("https://s-yukisato.github.io/img/brick.jpg")
             let mat2 = new THREE.MeshPhongMaterial();
-            mat2.map = texture2;
+            // mat2.map = texture2;
             // bunp
             let bump2 = textureLoader.load('https://s-yukisato.github.io/img/brick-bump.jpg');
             mat2.bumpMap = bump2;
-            mat2.bumpScale = 0.2;
+            mat2.bumpScale = 0.5;
 
             for(let i=1; i<3; i++){
                 
