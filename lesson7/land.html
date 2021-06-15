@@ -42,27 +42,6 @@
             // テクスチャー読み込み
             var textureLoader = new THREE.TextureLoader();
 
-            var texture = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg")
-            var mat = new THREE.MeshPhongMaterial();
-            mat.map = texture;
-
-            // // バンプマップ読み込み
-            // var bump = textureLoader.load("https://s-yukisato.github.io/img/tone-bump.jpg");
-            // mat.bumpMap = bump;
-            // mat.bumpScale = 1.0;
-
-            // ノーマルマップ
-            var normalTexture = textureLoader.load('https://s-yukisato.github.io/img/tone-normal.jpg');
-            mat.normalMap = normalTexture
-            mat.normalScale = new THREE.Vector2(1, -1)
-
-            // floor
-            const plane = createPlane(mat)
-            plane.rotation.x = -0.5 * Math.PI;
-            plane.position.x = 0;
-            plane.position.y = 0;
-            scene.add(plane)
-
             createFloor(0, 0)
             createFloor(-400, 0)
             createFloor(-400, -400)
@@ -121,7 +100,7 @@
             return plane;
         }
 
-        function createFloor(mat, p_x, p_z) {
+        function createFloor(p_x, p_z) {
             let texture = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg")
             let mat = new THREE.MeshPhongMaterial();
             mat.map = texture;
