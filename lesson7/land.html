@@ -61,13 +61,13 @@
             for(let i=1; i<3; i++){
                 createFloor()
             }
-            createFloor(mat, 0, 0)
-            createFloor(mat, -400, 0)
-            createFloor(mat, -400, -400)
-            createFloor(mat, 400, 0)
+            scene.add(createFloor(mat, 0, 0))
+            scene.add(createFloor(mat, -400, 0))
+            scene.add(createFloor(mat, -400, -400))
+            scene.add(createFloor(mat, 400, 0))
 
-            createWall(mat2, 0, -200)
-            createWall(mat2, 200, 0)
+            scene.add(createWall(mat2, 0, -200))
+            scene.add(createWall(mat2, 200, 0))
             
 
             // 木0をスプライトで作成
@@ -126,7 +126,7 @@
             plane.position.x = p_x;
             plane.position.y = 0;
             plane.position.z = p_z;
-            scene.add(plane)
+            return plane
         }
 
         function createWall(mat, p_x, p_z){
@@ -134,7 +134,7 @@
             plane.position.x = p_x;
             plane.position.y = 200;
             plane.position.z = p_z;
-            scene.add(plane)
+            return plane
         }
     </script>
 </head>
