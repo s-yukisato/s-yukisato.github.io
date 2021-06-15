@@ -73,6 +73,27 @@
             plane.position.y = 0;
             scene.add(plane)
 
+            // floor
+            const plane2 = createPlane(mat)
+            plane2.rotation.x = -0.5 * Math.PI;
+            plane2.position.x = -400;
+            plane2.position.z = 0;
+            scene.add(plane2)
+
+            // floor
+            const plane3 = createPlane(mat)
+            plane3.rotation.x = -0.5 * Math.PI;
+            plane3.position.x = -400;
+            plane3.position.z = -400;
+            scene.add(plane3)
+
+            // floor
+            const plane4 = createPlane(mat)
+            plane4.rotation.x = -0.5 * Math.PI;
+            plane4.position.x = -400;
+            plane4.position.z = -400;
+            scene.add(plane4)
+
             // wall
             const plane_wall1 = createPlane(mat2)
             plane_wall1.position.x = 0;
