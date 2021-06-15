@@ -56,16 +56,6 @@
             mat.normalMap = normalTexture
             mat.normalScale = new THREE.Vector2(1, -1)
 
-            // wall
-            var texture2 = textureLoader.load("https://s-yukisato.github.io/img/brick.jpg")
-            var mat2 = new THREE.MeshPhongMaterial();
-            mat2.map = texture2;
-
-            // bunp
-            var bump = textureLoader.load('https://s-yukisato.github.io/img/brick-bump.jpg');
-            mat2.bumpMap = bump;
-            mat2.bumpScale = 0.2;
-
             // floor
             const plane = createPlane(mat)
             plane.rotation.x = -0.5 * Math.PI;
@@ -73,41 +63,14 @@
             plane.position.y = 0;
             scene.add(plane)
 
-            // floor
-            const plane2 = createPlane(mat)
-            plane2.rotation.x = -0.5 * Math.PI;
-            plane2.position.x = -400;
-            plane2.position.z = 0;
-            scene.add(plane2)
+            createFloor(0, 0)
+            createFloor(-400, 0)
+            createFloor(-400, -400)
+            createFloor(400, 0)
 
-            // floor
-            const plane3 = createPlane(mat)
-            plane3.rotation.x = -0.5 * Math.PI;
-            plane3.position.x = -400;
-            plane3.position.z = -400;
-            scene.add(plane3)
-
-            // floor
-            const plane4 = createPlane(mat)
-            plane4.rotation.x = -0.5 * Math.PI;
-            plane4.position.x = -400;
-            plane4.position.z = -400;
-            scene.add(plane4)
-
-            // wall
-            const plane_wall1 = createPlane(mat2)
-            plane_wall1.position.x = 0;
-            plane_wall1.position.y = 200;
-            plane_wall1.position.z = -200;
-            scene.add(plane_wall1)
-
-            // wall
-            const plane_wall2 = createPlane(mat2)
-            plane_wall2.rotation.y = -0.5 * Math.PI;
-            plane_wall2.position.x = 200;
-            plane_wall2.position.y = 200;
-            plane_wall2.position.z = 0;
-            scene.add(plane_wall2)
+            createWall(0, -200)
+            createWall(200, 0)
+            
 
             // 木0をスプライトで作成
             var texture0 = textureLoader.load("https://s-yukisato.github.io/lesson4/img/tree0.png");
@@ -155,8 +118,39 @@
             const planeGeometry = new THREE.PlaneGeometry(width, height, 1, 1);
             const planeMaterial = new THREE.MeshPhongMaterial({ color });
             const plane = new THREE.Mesh(planeGeometry, mat);
-
             return plane;
+        }
+
+        function createFloor(mat, p_x, p_z) {
+            let texture = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg")
+            let mat = new THREE.MeshPhongMaterial();
+            mat.map = texture;
+            // bunp
+            let bump = textureLoader.load('https://s-yukisato.github.io/img/tone-bump.jpg');
+            mat.bumpMap = bump;
+            mat.bumpScale = 0.2;
+            // floor
+            const plane = createPlane(mat)
+            plane.rotation.x = -0.5 * Math.PI;
+            plane.position.x = p_x;
+            plane.position.y = 0;
+            plane.position.z = p_z;
+            scene.add(plane)
+        }
+
+        function createWall(p_x, p_z){
+            let texture = textureLoader.load("https://s-yukisato.github.io/img/brick.jpg")
+            let mat = new THREE.MeshPhongMaterial();
+            mat.map = texture;
+            // bunp
+            let bump = textureLoader.load('https://s-yukisato.github.io/img/brick-bump.jpg');
+            mat.bumpMap = bump;
+            mat.bumpScale = 0.2;
+            const plane = createPlane(mat)
+            plane.position.x = p_x;
+            plane.position.y = 200;
+            plane.position.z = p_z;
+            scene.add(plane)
         }
     </script>
 </head>
