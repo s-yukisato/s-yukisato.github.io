@@ -101,8 +101,8 @@
             let heightSegments = 0; //高さの分割数です。
             let openEnded = true; //true：フタをしない,false：フタをする
 
-            const geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, objHeight, radiusSegments, heightSegments, openEnded),
-            const cylinder = new THREE.Mesh(geometry, mat_);
+            const geometry_ = new THREE.CylinderGeometry(radiusTop, radiusBottom, objHeight, radiusSegments, heightSegments, openEnded),
+            const cylinder = new THREE.Mesh(geometry_, mat_);
             scene.add(cylinder);
 
 
