@@ -58,8 +58,8 @@
             mat2.bumpMap = bump2;
             mat2.bumpScale = 0.3;
 
-            for(let i=1; i<3; i++){
-                
+            for (let i = 1; i < 3; i++) {
+
             }
             // 床
             scene.add(createFloor(mat, 0, 0))
@@ -77,7 +77,7 @@
             scene.add(createWall(mat2, -0.5, 200, 0))
             scene.add(createWall(mat2, -0.5, 200, 400))
             scene.add(createWall(mat2, -0.5, 200, 800))
-            
+
 
             // 宝箱をスプライトで作成
             var texture0 = textureLoader.load("https://s-yukisato.github.io/img/silver_treasure_illust_1995.png");
@@ -89,6 +89,11 @@
             sprite.position.z = 0;
             sprite.scale.set(100, 100, 100);
             scene.add(sprite);
+
+            const geometry = new THREE.CylinderGeometry(5, 5, 20, 10);
+            const material = new THREE.MeshBasicMaterial({ color: 0xFF0000 });
+            const cylinder = new THREE.Mesh(geometry, material);
+            scene.add(cylinder);
 
 
             // 箱を作成
@@ -138,7 +143,7 @@
             return plane
         }
 
-        function createWall(mat, r_y, p_x, p_z){
+        function createWall(mat, r_y, p_x, p_z) {
             const plane = createPlane(mat)
             plane.rotation.y = r_y * Math.PI;
             plane.position.x = p_x;
