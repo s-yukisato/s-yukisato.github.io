@@ -214,9 +214,12 @@
                     ball.rotation.x += 0.03
                     ball.position.z += 3
                     ball.position.y -= 2
-                } else {
+                } else if (ball.position.z < 500) {
                     ball.rotation.x += 0.05
                     ball.position.z += 5
+                } else {
+                    ball.rotation.x += 0.1
+                    ball.position.y += 10
                 }
 
                 if (camera.rotation.y < -1.15) {
@@ -227,7 +230,7 @@
                 } else if (front.position.x > 350) {
                     if (ball.position.z < 350) {
                         camera.position.z += 5
-                    } else if (ball.position.z < 1400) {
+                    } else if (ball.position.y < 600) {
                         camera.position.z -= 3
                     } else if (camera.position.y < 300) {
                         camera.rotation.x -= 0.005
