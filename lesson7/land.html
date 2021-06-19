@@ -80,9 +80,7 @@
             let mat_t = new THREE.MeshPhongMaterial();
             mat_t.map = texture_tobira;
 
-            for (let i = 1; i < 3; i++) {
 
-            }
             // 床
             scene.add(createFloor(mat1, 0, 150, -900))
             scene.add(createFloor(mat1, 0, 150, -500))
@@ -93,7 +91,7 @@
 
 
             // 正面壁
-            let front = createWall(mat_t, 0, 0, 500, -200)
+            let front = createWall(mat_t, 0, 0, 200, 300)
             scene.add(front)
             scene.add(createWall(mat2, 0, 0, 350, -800))
             // 左壁
@@ -182,8 +180,11 @@
                 requestAnimationFrame(update);
 
                 // 箱を回転させる
-                if (camera.position.z < -400) {
-
+                if(camera.rotation.y > 0.25){
+                    camera.position.x += 3
+                }
+                else if (camera.position.z < -400) {
+                    camera.rotation.y += 0.005
                 } else if (front.position.x > 400) {
                     if (camera.position.y < 400) {
                         camera.rotation.x -= 0.005
@@ -193,8 +194,8 @@
                         camera.position.z -= 3
                     }
                 }
-                else if (camera.position.z < 500) {
-                    if (camera.rotation.x > 1) {
+                else if (camera.position.z < 600) {
+                    if (camera.rotation.x > 0.25) {
                         front.position.x += 3
                         front.rotation.y -= 0.01
                     }
