@@ -76,6 +76,10 @@
             mat_s.bumpMap = bump_stairs;
             mat_s.bumpScale = 0.3;
 
+            let texture_tobira = textureLoader.load("https://s-yukisato.github.io/img/tobira.jpg")
+            let mat_t = new THREE.MeshPhongMaterial();
+            mat_t.map = texture_tobira;
+
             for (let i = 1; i < 3; i++) {
 
             }
@@ -89,7 +93,7 @@
 
 
             // 正面壁
-            let front = createWall(mat2, 0, 0, 200, -200)
+            let front = createWall(mat_t, 0, 0, 500, -200)
             scene.add(front)
             scene.add(createWall(mat2, 0, 0, 350, -800))
             // 左壁
@@ -179,9 +183,10 @@
 
                 // 箱を回転させる
                 if (camera.position.z < -400){
-                    
+
                 }else if (front.position.x > 400) {
                     if (camera.position.y < 400) {
+                        camera.rotation.x -= 0.005
                         camera.position.y += 2
                         camera.position.z -= 2
                     } else {
@@ -189,7 +194,7 @@
                     }
                 }
                 else if (camera.position.z < 500) {
-                    camera.rotation.x += 0.01
+                    camera.rotation.x += 0.005
                     front.position.x += 3
                     front.rotation.y -= 0.01
                 } else camera.position.z -= 3
