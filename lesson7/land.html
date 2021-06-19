@@ -32,12 +32,12 @@
             // カメラコントローラーを作成
             const controls = new THREE.OrbitControls(camera, document.body);
 
-            // // helper
-            // const gridHelper = new THREE.GridHelper(200, 50); // size, step
-            // scene.add(gridHelper);
+            // helper
+            const gridHelper = new THREE.GridHelper(200, 50); // size, step
+            scene.add(gridHelper);
 
-            // const axisHelper = new THREE.AxisHelper(200, 50);
-            // scene.add(axisHelper);
+            const axisHelper = new THREE.AxisHelper(200, 50);
+            scene.add(axisHelper);
 
             // テクスチャー読み込み
             var textureLoader = new THREE.TextureLoader();
@@ -71,16 +71,16 @@
 
 
             // 正面壁
-            let front = createWall(mat2, 0, 0, -200)
+            let front = createWall(mat2, 0, 0, 500, -200)
             scene.add(front)
             // 左壁
-            scene.add(createWall(mat2, 0.5, -200, 0))
-            scene.add(createWall(mat2, 0.5, -200, 400))
-            scene.add(createWall(mat2, 0.5, -200, 800))
+            scene.add(createWall(mat2, 0.5, -200, 200, 0))
+            scene.add(createWall(mat2, 0.5, -200, 200, 400))
+            scene.add(createWall(mat2, 0.5, -200, 200, 800))
             // 右回転
-            scene.add(createWall(mat2, -0.5, 200, 0))
-            scene.add(createWall(mat2, -0.5, 200, 400))
-            scene.add(createWall(mat2, -0.5, 200, 800))
+            scene.add(createWall(mat2, -0.5, 200, 200, 0))
+            scene.add(createWall(mat2, -0.5, 200, 200, 400))
+            scene.add(createWall(mat2, -0.5, 200, 200, 800))
 
 
             // 宝箱をスプライトで作成
@@ -111,10 +111,23 @@
 
 
 
-            // 箱を作成
-            // var geometry = new THREE.SphereGeometry(300, 300, 300);
-            // var box = new THREE.Mesh(geometry, mat);
-            // scene.add(box);
+            // // 箱を作成(原点に作成)
+            var geometry = new THREE.BoxGeometry(400, 100, 100);
+            var material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+
+            var box = new THREE.Mesh(geometry, material)
+            box.position.y = 0
+            scene.add(box)
+
+            var box2 = new THREE.Mesh(geometry, material)
+            box2.position.y = 100
+            box2.position.z = -100
+            scene.add(box2)
+
+            var box3 = new THREE.Mesh(geometry, material)
+            box3.position.y = 200
+            box3.position.z = -200
+            scene.add(box3)
 
             // new THREE.PointLight(色, 光の強さ, 距離, 光の減衰率)
             const pointLight = new THREE.PointLight(0xFFFFFF, 2, 50, 1.0);
@@ -142,12 +155,9 @@
 
                 // 箱を回転させる
                 if (front.position.x > 400) {
-                    camera.position.y +=1
+                    camera.position.y += 1
                     camera.position.z -= 3
 
-                    if (camera.position.z < 100) {
-                        scene.add(createFloor(mat, 0, -800))
-                    }
                 }
                 else if (camera.position.z < 300) {
                     front.position.x += 3
@@ -185,11 +195,11 @@
             return plane
         }
 
-        function createWall(mat, r_y, p_x, p_z) {
+        function createWall(mat, r_y, p_x, p_y, p_z) {
             const plane = createPlane(mat)
             plane.rotation.y = r_y * Math.PI;
             plane.position.x = p_x;
-            plane.position.y = 200;
+            plane.position.y = p_y;
             plane.position.z = p_z;
             return plane
         }
