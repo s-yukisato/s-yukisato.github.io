@@ -204,7 +204,7 @@
                 if(ball.position.z < 0) {
                     ball.rotation.y += 0.03
                     ball.position.z += 3
-                }else if(ball.position.z < 100){
+                }else if(ball.position.z < 200){
                     ball.rotation.y += 0.03
                     ball.position.z += 3
                     ball.position.y -= 2
@@ -213,10 +213,10 @@
                 if (camera.rotation.y < -1.0) {
                     wall.position.z += 3
                 }
-                else if (camera.position.z < -500) {
+                else if (camera.position.z < -600) {
                     camera.position.x += 0.01
                     camera.rotation.y -= 0.005
-                    camera.rotation.x += 0.002
+                    camera.rotation.x += 0.003
                 } else if (front.position.x > 400) {
                     if (camera.position.y < 400) {
                         camera.rotation.x -= 0.005
