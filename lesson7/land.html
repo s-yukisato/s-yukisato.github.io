@@ -150,7 +150,7 @@
             // normal
             let normal = textureLoader.load('https://s-yukisato.github.io/img/block-normal.jpg');
             mat_b.normalMap = normal;
-            mat_b.normalScale = new THREE.Vector2( 1, -1)
+            mat_b.normalScale = new THREE.Vector2(1, -1)
 
             // 球を作成(原点に作成)
             var geometry = new THREE.SphereGeometry(200, 32, 32);
@@ -202,16 +202,17 @@
                 requestAnimationFrame(update);
 
                 if(ball.position.z < 0) {
-                    ball.rotation.y += 0.03
+                    ball.rotation.x += 0.02
                     ball.position.z += 3
                 }else if(ball.position.z < 200){
-                    ball.rotation.y += 0.03
+                    ball.rotation.x += 0.03
                     ball.position.z += 3
                     ball.position.y -= 2
                 }
 
-                if (camera.rotation.y < -1.5) {
+                if (camera.rotation.y < -1.25) {
                     wall.position.z += 3
+                    wall.opacity-=0.1
                 }
                 else if (camera.position.z < -600) {
                     camera.position.x += 0.1
