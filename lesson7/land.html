@@ -179,7 +179,7 @@
 
                 // 箱を回転させる
                 if (camera.position.z < -400){
-                    camera.rotation.x += 0.01
+                    
                 }else if (front.position.x > 400) {
                     if (camera.position.y < 400) {
                         camera.position.y += 2
@@ -189,7 +189,7 @@
                     }
                 }
                 else if (camera.position.z < 500) {
-                    camera.rotation.z += 0.01
+                    camera.rotation.x += 0.01
                     front.position.x += 3
                     front.rotation.y -= 0.01
                 } else camera.position.z -= 3
