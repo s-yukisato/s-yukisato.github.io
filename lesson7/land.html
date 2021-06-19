@@ -201,16 +201,19 @@
             var update = function () {
                 requestAnimationFrame(update);
 
-                if(ball.position.z < 500) {
-                    ball.rotation.z += 0.03
+                if(ball.position.z < 0) {
+                    ball.rotation.y += 0.03
                     ball.position.z += 3
+                }else if(ball.position.z < 100){
+                    ball.rotation.y += 0.03
+                    ball.position.z += 3
+                    ball.position.y -= 2
                 }
 
-                // 箱を回転させる
                 if (camera.rotation.y < -1.0) {
                     wall.position.z += 3
                 }
-                else if (camera.position.z < -400) {
+                else if (camera.position.z < -500) {
                     camera.position.x += 0.01
                     camera.rotation.y -= 0.005
                     camera.rotation.x += 0.002
