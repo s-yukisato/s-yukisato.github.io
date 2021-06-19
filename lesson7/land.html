@@ -48,7 +48,7 @@
             let texture = textureLoader.load("https://s-yukisato.github.io/img/ground.jpg")
             let mat = new THREE.MeshPhongMaterial();
             mat.map = texture;
-            // bunp
+            // bump
             let bump = textureLoader.load('https://s-yukisato.github.io/img/ground-bump.jpg');
             mat.bumpMap = bump;
             mat.bumpScale = 0.3;
@@ -57,7 +57,7 @@
             let texture1 = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg")
             let mat1 = new THREE.MeshPhongMaterial();
             mat1.map = texture1;
-            // bunp
+            // bump
             let bump1 = textureLoader.load('https://s-yukisato.github.io/img/tone-bump.jpg');
             mat1.bumpMap = bump1;
             mat1.bumpScale = 0.3;
@@ -65,7 +65,7 @@
             let texture2 = textureLoader.load("https://s-yukisato.github.io/img/brick.jpg")
             let mat2 = new THREE.MeshPhongMaterial();
             mat2.map = texture2;
-            // bunp
+            // bump
             let bump2 = textureLoader.load('https://s-yukisato.github.io/img/brick-bump.jpg');
             mat2.bumpMap = bump2;
             mat2.bumpScale = 0.3;
@@ -82,6 +82,15 @@
             let texture_tobira = textureLoader.load("https://s-yukisato.github.io/img/tobira.jpg")
             let mat_t = new THREE.MeshPhongMaterial();
             mat_t.map = texture_tobira;
+
+            var texture_wood = textureLoader.load('https://s-yukisato.github.io/img/wood.jpg');
+            var mat_w = new THREE.MeshPhongMaterial();
+            mat_w.map = texture_wood;
+
+            // normal
+            let normal_w = textureLoader.load('https://s-yukisato.github.io/img/wood-nor.jpg');
+            mat_w.normalMap = normal_w;
+            mat_w.normalScale = new THREE.Vector2(1, -1)
 
 
             // 床
@@ -106,16 +115,16 @@
             scene.add(createWall(mat2, 0.5, -200, 350, -400))
 
             scene.add(createWall(mat2, 0.5, -200, 200, 0))
-            scene.add(createWall(mat2, 0.5, -200, 200, 400))
-            scene.add(createWall(mat2, 0.5, -200, 200, 800))
+            scene.add(createWall(mat_w, 0.5, -200, 200, 400))
+            scene.add(createWall(mat_w, 0.5, -200, 200, 800))
             // 右回転
             let wall = createWall(mat2, -0.5, 200, 350, -800)
             scene.add(wall)
             scene.add(createWall(mat2, -0.5, 200, 350, -400))
 
             scene.add(createWall(mat2, -0.5, 200, 200, 0))
-            scene.add(createWall(mat2, -0.5, 200, 200, 400))
-            scene.add(createWall(mat2, -0.5, 200, 200, 800))
+            scene.add(createWall(mat_w, -0.5, 200, 200, 400))
+            scene.add(createWall(mat_w, -0.5, 200, 200, 800))
 
 
             // 宝箱をスプライトで作成
@@ -257,7 +266,9 @@
 
                 renderer.render(scene, camera);
             };
-            if (!control) update()
+            if (control && camera.position.z > 600){
+                
+            }else update()
         }
 
         function createPlane(mat, width = 400, height = 400, color = 0xcccccc) {
