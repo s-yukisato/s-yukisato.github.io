@@ -41,12 +41,12 @@
 
             // テクスチャー読み込み
             var textureLoader = new THREE.TextureLoader();
-
-            let texture = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg")
+            // 地面用
+            let texture = textureLoader.load("https://s-yukisato.github.io/img/ground.jpg")
             let mat = new THREE.MeshPhongMaterial();
             mat.map = texture;
             // bunp
-            let bump = textureLoader.load('https://s-yukisato.github.io/img/tone-bump.jpg');
+            let bump = textureLoader.load('https://s-yukisato.github.io/img/ground-bump.jpg');
             mat.bumpMap = bump;
             mat.bumpScale = 0.3;
 
@@ -67,8 +67,10 @@
             scene.add(createFloor(mat, 0, 800))
             scene.add(createFloor(mat, 0, 1200))
 
+
             // 正面壁
-            scene.add(createWall(mat2, 0, 0, -200))
+            let front = createWall(mat2, 0, 0, -200)
+            scene.add(front)
             // 左壁
             scene.add(createWall(mat2, 0.5, -200, 0))
             scene.add(createWall(mat2, 0.5, -200, 400))
@@ -101,9 +103,9 @@
             let heightSegments = 0; //高さの分割数です。
             let openEnded = true; //true：フタをしない,false：フタをする
 
-            const geometry_ = new THREE.CylinderGeometry(radiusTop, radiusBottom, objHeight, radiusSegments, heightSegments, openEnded)
-            const cylinder = new THREE.Mesh(geometry_, mat_);
-            scene.add(cylinder);
+            // const geometry_ = new THREE.CylinderGeometry(radiusTop, radiusBottom, objHeight, radiusSegments, heightSegments, openEnded)
+            // const cylinder = new THREE.Mesh(geometry_, mat_);
+            // scene.add(cylinder);
 
 
 
@@ -127,6 +129,27 @@
 
             // const bgTexture = textureLoader.load("https://s-yukisato.github.io/img/sky_00165.jpg")
             // scene.background = bgTexture
+
+            // 初回実行
+            var update = function () {
+                requestAnimationFrame(update);
+
+                // 箱を回転させる
+                if (front.position.x > 200) {
+                    camera.position.z -= 3
+                    if(camera.position.z < 100){
+                        scene.add(createFloor(mat, 0, -400))
+                    }
+                }
+                else if (camera.position.z < 300) {
+                    front.position.x += 3
+                    front.rotation.y -= 0.01
+                } else camera.position.z -= 3
+
+
+                renderer.render(scene, camera);
+            };
+            update();
 
             tick();
             // 毎フレーム時に実行されるループイベントです

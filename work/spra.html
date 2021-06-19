@@ -1,0 +1,124 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+  <script src="../lesson4/OrbitControls.js"></script>
+  <script>
+    // ページの読み込みを待つ
+    window.addEventListener('load', init);
+
+    function init() {
+      // サイズを指定
+      const width = 960;
+      const height = 540;
+
+      // レンダラーを作成
+      const renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector('#myCanvas'),
+      });
+      renderer.setSize(width, height)
+      renderer.setClearColor(0xffffff);
+      // シーンを作成
+      const scene = new THREE.Scene();
+
+      // カメラを作成
+      const camera = new THREE.PerspectiveCamera(45, width / height);
+      // カメラの初期座標を設定
+      camera.position.set(0, 100, 1000);
+
+      // カメラコントローラーを作成
+      const controls = new THREE.OrbitControls(camera, document.body);
+
+      // helper
+      const gridHelper = new THREE.GridHelper(200, 50); // size, step
+      scene.add(gridHelper);
+
+      const axisHelper = new THREE.AxisHelper(200, 50);
+      scene.add(axisHelper);
+
+      // 平行光源1
+      var directionalLight1 = new THREE.DirectionalLight(0xffffff);
+      directionalLight1.position.set(100, 100, 100);
+      // シーンに追加
+      scene.add(directionalLight1);
+      // 平行光源2
+      var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+      directionalLight2.position.set(-100, 100, 100);
+      // シーンに追加
+      scene.add(directionalLight2);
+
+      // // 箱を作成(原点に作成)
+      var geometry = new THREE.BoxGeometry(100, 100, 100);
+      var material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+
+      // テクスチャー読み込み
+      var textureLoader = new THREE.TextureLoader();
+
+      function createWall(mat, r_y, p_x, p_z) {
+        const plane = createPlane(mat)
+        plane.rotation.y = r_y * Math.PI;
+        plane.position.x = p_x;
+        plane.position.y = 200;
+        plane.position.z = p_z;
+        return plane
+      }
+
+      let texture = textureLoader.load("../img/tobira.jpg")
+      let mat = new THREE.MeshPhongMaterial();
+      mat.map = texture;
+
+      scene.add(createWall(mat, 0, 50, 0))
+
+      var box_right = new THREE.Mesh(geometry, mat);
+      box_right.position.x = 50
+      var box_left = new THREE.Mesh(geometry, material);
+      box_left.position.x = -50
+      scene.add(box_right);
+      scene.add(box_left);
+
+      let radiusTop = 100; //上面の半径です。0にすると円錐になります。
+      let radiusBottom = 100; //底面の半径です。
+      let objHeight = 50; //高さです。
+      let radiusSegments = 32; //円周の分割数です。
+      let heightSegments = 32; //高さの分割数です。
+      let openEnded = true; //true：フタをしない,false：フタをする
+
+      const geometry_ = new THREE.CylinderGeometry(radiusTop, radiusBottom, objHeight, radiusSegments, heightSegments, openEnded)
+      const cylinder = new THREE.Mesh(geometry_, material);
+      scene.add(cylinder);
+
+      // 初回実行
+      var update = function () {
+        requestAnimationFrame(update);
+
+        // 箱を回転させる
+        if (camera.position.z < 300) {
+          box_right.position.x++
+          box_right.rotation.y -= 0.01
+          box_left.position.x--
+          box_left.rotation.y += 0.01
+        } else camera.position.z -= 3
+
+
+        renderer.render(scene, camera);
+      };
+      update();
+
+      tick();
+      // 毎フレーム時に実行されるループイベントです
+      function tick() {
+        // レンダリング
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+    }
+
+  </script>
+</head>
+
+<body>
+  <canvas id="myCanvas"></canvas>
+</body>
+
+</html>
