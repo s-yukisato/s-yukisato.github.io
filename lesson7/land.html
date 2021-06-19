@@ -225,23 +225,21 @@
                 if (camera.rotation.y < -1.15) {
                     wall.position.z += 3
                     wall.opacity -= 0.1
-                }
-                else if (camera.position.z < -600) {
+                }else if (camera.position.z < -600) {
                     camera.position.x += 0.1
                     camera.rotation.y -= 0.005
                     camera.rotation.x += 0.001
                 } else if (front.position.x > 400) {
                     
-                    if (camera.position.y < 400) {
+                    if (camera.position.y < 350) {
                         camera.rotation.x -= 0.005
                         camera.position.y += 2
                         camera.position.z -= 2
                     } else {
                         camera.position.z -= 3
-                        camera.rotation.x += 0.005
+                        camera.rotation.x += 0.001
                     }
-                }
-                else if (camera.position.z < 600) {
+                } else if (camera.position.z < 600) {
                     if (camera.rotation.x > 0.03) {
                         front.position.x += 3
                         front.rotation.y -= 0.01
