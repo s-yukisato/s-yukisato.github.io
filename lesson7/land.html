@@ -139,23 +139,27 @@
 
             var box = new THREE.Mesh(geometry, mat_s)
             box.position.y = 25
-            box.position.z = 200
+            box.position.z = 125
+            scene.add(box)
+            box.position.x = 75
+            box.position.y = 25
+            box.position.z = 125
+            scene.add(box)
+            box.position.x = 125
+            scene.add(box)
+            box.position.x = 175
             scene.add(box)
 
             var box2 = new THREE.Mesh(geometry, mat_s)
             box2.position.y = 75
-            box2.position.z = 150
+            box2.position.z = 75
             scene.add(box2)
 
             var box3 = new THREE.Mesh(geometry, mat_s)
             box3.position.y = 125
-            box3.position.z = 100
+            box3.position.z = 25
             scene.add(box3)
 
-            var box3 = new THREE.Mesh(geometry, mat_s)
-            box3.position.y = 125
-            box3.position.z = 50
-            scene.add(box3)
 
             // new THREE.PointLight(色, 光の強さ, 距離, 光の減衰率)
             const pointLight = new THREE.PointLight(0xFFFFFF, 2, 50, 1.0);
@@ -197,7 +201,7 @@
 
                 renderer.render(scene, camera);
             };
-            if(camera.position.z < -600){
+            if(camera.position.z > -400){
                 update();
             }
 
