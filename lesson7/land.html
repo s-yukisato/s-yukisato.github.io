@@ -155,7 +155,7 @@
             // 球を作成(原点に作成)
             var geometry = new THREE.SphereGeometry(200, 32, 32);
             var ball = new THREE.Mesh(geometry, mat_b);
-            ball.position.set(0, 350, -500)
+            ball.position.set(0, 350, -1000)
             scene.add(ball);
 
 
@@ -210,13 +210,13 @@
                     ball.position.y -= 2
                 }
 
-                if (camera.rotation.y < -1.0) {
+                if (camera.rotation.y < -1.5) {
                     wall.position.z += 3
                 }
                 else if (camera.position.z < -600) {
-                    camera.position.x += 0.01
+                    camera.position.x += 0.1
                     camera.rotation.y -= 0.005
-                    camera.rotation.x += 0.003
+                    camera.rotation.x += 0.002
                 } else if (front.position.x > 400) {
                     if (camera.position.y < 400) {
                         camera.rotation.x -= 0.005
