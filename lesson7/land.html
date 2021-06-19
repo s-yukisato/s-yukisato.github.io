@@ -58,11 +58,20 @@
             mat2.bumpMap = bump2;
             mat2.bumpScale = 0.3;
 
+            // 階段用
+            let texture_stairs = textureLoader.load("https://s-yukisato.github.io/img/stone.jpg")
+            let mat_s = new THREE.MeshPhongMaterial();
+            mat_s.map = texture_stairs;
+            // bunp
+            let bump_stairs = textureLoader.load('https://s-yukisato.github.io/img/stone-bump.jpg');
+            mat_s.bumpMap = bump_stairs;
+            mat_s.bumpScale = 0.3;
+
             for (let i = 1; i < 3; i++) {
 
             }
             // 床
-            scene.add(createFloor(mat, 0, -400))
+            scene.add(createFloor(mat, 150, -400))
 
             scene.add(createFloor(mat, 0, 0))
             scene.add(createFloor(mat, 0, 400))
@@ -71,7 +80,7 @@
 
 
             // 正面壁
-            let front = createWall(mat2, 0, 0, 500, -200)
+            let front = createWall(mat2, 0, 0, 200, -200)
             scene.add(front)
             // 左壁
             scene.add(createWall(mat2, 0.5, -200, 200, 0))
@@ -112,21 +121,22 @@
 
 
             // // 箱を作成(原点に作成)
-            var geometry = new THREE.BoxGeometry(400, 100, 100);
-            var material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+            var geometry = new THREE.BoxGeometry(400, 50, 50);
 
-            var box = new THREE.Mesh(geometry, material)
-            box.position.y = 0
+
+            var box = new THREE.Mesh(geometry, mat_s)
+            box.position.y = 25
+            box.position.z = 50
             scene.add(box)
 
-            var box2 = new THREE.Mesh(geometry, material)
-            box2.position.y = 100
-            box2.position.z = -100
+            var box2 = new THREE.Mesh(geometry, mat_s)
+            box2.position.y = 75
+            box2.position.z = 100
             scene.add(box2)
 
-            var box3 = new THREE.Mesh(geometry, material)
-            box3.position.y = 200
-            box3.position.z = -200
+            var box3 = new THREE.Mesh(geometry, mat_s)
+            box3.position.y = 125
+            box3.position.z = 150
             scene.add(box3)
 
             // new THREE.PointLight(色, 光の強さ, 距離, 光の減衰率)
@@ -155,9 +165,12 @@
 
                 // 箱を回転させる
                 if (front.position.x > 400) {
-                    camera.position.y += 1
-                    camera.position.z -= 3
-
+                    if (camera.position.y < 250) {
+                        camera.position.y += 3
+                        camera.position.z -= 3
+                    }else{
+                        camera.position.z -= 3
+                    }
                 }
                 else if (camera.position.z < 300) {
                     front.position.x += 3
