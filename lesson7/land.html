@@ -202,13 +202,16 @@
             var update = function () {
                 requestAnimationFrame(update);
 
-                if (ball.position.z < 0) {
+                if (ball.position.z < 100) {
                     ball.rotation.x += 0.02
                     ball.position.z += 3
-                } else if (ball.position.z < 200) {
+                } else if (ball.position.z < 300) {
                     ball.rotation.x += 0.03
                     ball.position.z += 3
                     ball.position.y -= 2
+                } else{
+                    ball.rotation.x += 0.05
+                    ball.position.z += 5
                 }
 
                 if (camera.rotation.y < -1.15) {
@@ -220,7 +223,9 @@
                     camera.rotation.y -= 0.005
                     camera.rotation.x += 0.001
                 } else if (front.position.x > 400) {
-                    if (camera.position.y < 400) {
+                    if(ball.position.z < 400) {
+                        camera.position.z += 3
+                    }else if (camera.position.y < 400) {
                         camera.rotation.x -= 0.005
                         camera.position.y += 2
                         camera.position.z -= 2
