@@ -106,9 +106,10 @@
             // 正面壁
             let front = createWall(mat_t, 0, 0, 200, 300)
             scene.add(front)
-            scene.add(createWall(mat2, 0, 0, 350, -800))
-            scene.add(createWall(mat2, 0, 400, 350, -800))
+            scene.add(createWall(mat2, 0, 0, 350, -1000))
+            scene.add(createWall(mat2, 0, 400, 350, -1000))
             // 左壁
+            scene.add(createWall(mat2, 0.5, -200, 350, -1200))
             scene.add(createWall(mat2, 0.5, -200, 350, -800))
             scene.add(createWall(mat2, 0.5, -200, 350, -400))
 
@@ -185,9 +186,9 @@
             }
 
             light(100, 100, 100)
-            light(-100, 100, 100)
+            // light(-100, 100, 100)
             // light(100, -100, -100)
-            // light(-100, -100, -100)
+            light(-100, -100, -100)
 
             function light(x, y, z) {
                 // 平行光源
@@ -217,7 +218,7 @@
                     ball.position.z += 5
                 }
 
-                if (camera.rotation.y < -1.15) {
+                if (camera.rotation.y < -1.0) {
                     wall.position.z += 3
                 }else if (camera.position.z < -600) {
                     camera.rotation.y -= 0.005
@@ -229,7 +230,7 @@
                         camera.position.z -= 2
                     } else {
                         camera.position.z -= 3
-                        camera.rotation.x += 0.001
+                        // camera.rotation.x += 0.001
                     }
                 } else if (camera.position.z < 600) {
                     if (camera.rotation.x > 0.03) {
