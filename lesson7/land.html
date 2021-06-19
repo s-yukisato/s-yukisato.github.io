@@ -50,6 +50,15 @@
             mat.bumpMap = bump;
             mat.bumpScale = 0.3;
 
+            // 地面用2
+            let texture1 = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg")
+            let mat1 = new THREE.MeshPhongMaterial();
+            mat1.map = texture1;
+            // bunp
+            let bump1 = textureLoader.load('https://s-yukisato.github.io/img/tone-bump.jpg');
+            mat1.bumpMap = bump1;
+            mat1.bumpScale = 0.3;
+
             let texture2 = textureLoader.load("https://s-yukisato.github.io/img/brick.jpg")
             let mat2 = new THREE.MeshPhongMaterial();
             mat2.map = texture2;
@@ -71,7 +80,8 @@
 
             }
             // 床
-            scene.add(createFloor(mat, 0, 150, -600))
+            scene.add(createFloor(mat1, 0, 150, -900))
+            scene.add(createFloor(mat1, 0, 150, -500))
 
             scene.add(createFloor(mat, 0, 150, -200))
             scene.add(createFloor(mat, 0, 0, 400))
@@ -176,7 +186,7 @@
                     if (camera.position.y < 200) {
                         camera.position.y += 3
                         camera.position.z -= 3
-                    }else{
+                    } else {
                         camera.position.z -= 3
                     }
                 }
@@ -188,7 +198,9 @@
 
                 renderer.render(scene, camera);
             };
-            update();
+            if(camera.position.z > -600){
+                update();
+            }
 
             tick();
             // 毎フレーム時に実行されるループイベントです
