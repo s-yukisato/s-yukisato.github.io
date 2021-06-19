@@ -82,7 +82,7 @@
 
 
             // 床
-            scene.add(createFloor(mat1, 200, 150, -900))
+            scene.add(createFloor(mat1, 400, 150, -500))
 
             scene.add(createFloor(mat1, 0, 150, -900))
             scene.add(createFloor(mat1, 0, 150, -500))
@@ -96,7 +96,7 @@
             let front = createWall(mat_t, 0, 0, 200, 300)
             scene.add(front)
             scene.add(createWall(mat2, 0, 0, 350, -800))
-            scene.add(createWall(mat2, 0, 200, 350, -800))
+            scene.add(createWall(mat2, 0, 400, 350, -800))
             // 左壁
             scene.add(createWall(mat2, 0.5, -200, 350, -800))
             scene.add(createWall(mat2, 0.5, -200, 350, -400))
@@ -118,9 +118,9 @@
             const material0 = new THREE.SpriteMaterial({ map: texture0, });
 
             const sprite = new THREE.Sprite(material0);
-            sprite.position.x = 100;
+            sprite.position.x = 300;
             sprite.position.y = 200;
-            sprite.position.z = -800;
+            sprite.position.z = -700;
             sprite.scale.set(100, 100, 100);
             scene.add(sprite);
 
@@ -188,6 +188,7 @@
                 }
                 else if (camera.position.z < -400) {
                     camera.rotation.y -= 0.005
+                    camera.rotation.x += 0.001
                 } else if (front.position.x > 400) {
                     if (camera.position.y < 400) {
                         camera.rotation.x -= 0.005
