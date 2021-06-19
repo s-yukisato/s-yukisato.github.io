@@ -11,7 +11,7 @@
         // 自動カメラ移動を止める
         let control = false
 
-        function init(control) {
+        function init() {
             // サイズを指定
             const width = 960;
             const height = 540;
@@ -143,6 +143,20 @@
             // const cylinder = new THREE.Mesh(geometry_, mat_);
             // scene.add(cylinder);
 
+            var texture_block = textureLoader.load('https://s-yukisato.github.io/img/block.jpg');
+            var mat_b = new THREE.MeshPhongMaterial();
+            mat_b.map = texture_block;
+
+            // normal
+            let normal = textureLoader.load('https://s-yukisato.github.io/img/block-normal.jpg');
+            mat_b.normalMap = normal;
+            mat_b.normalScale = new THREE.Vector2( 1, -1)
+
+            // 地球を作成(原点に作成)
+            var geometry = new THREE.SphereGeometry(300, 30, 30);
+            var ball = new THREE.Mesh(geometry, mat_b);
+            ball.position.set(0, 200, -500)
+            scene.add(ball);
 
 
             // // 箱を作成(原点に作成)
@@ -187,6 +201,8 @@
             var update = function () {
                 requestAnimationFrame(update);
 
+
+
                 // 箱を回転させる
                 if (camera.rotation.y < -1.0) {
                     wall.position.z += 3
@@ -215,13 +231,12 @@
 
                 renderer.render(scene, camera);
             };
-            if (!control) update()
+            update()
 
             tick();
             // 毎フレーム時に実行されるループイベントです
             function tick() {
                 // レンダリング
-                control = true
                 renderer.render(scene, camera);
                 requestAnimationFrame(tick);
             }
