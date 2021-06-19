@@ -180,11 +180,11 @@
                 requestAnimationFrame(update);
 
                 // 箱を回転させる
-                if(camera.rotation.y > 0.25){
+                if(camera.rotation.y < -0.5){
                     camera.position.x += 3
                 }
                 else if (camera.position.z < -400) {
-                    camera.rotation.y += 0.005
+                    camera.rotation.y -= 0.005
                 } else if (front.position.x > 400) {
                     if (camera.position.y < 400) {
                         camera.rotation.x -= 0.005
@@ -195,7 +195,7 @@
                     }
                 }
                 else if (camera.position.z < 600) {
-                    if (camera.rotation.x > 0.25) {
+                    if (camera.rotation.x > 0.1) {
                         front.position.x += 3
                         front.rotation.y -= 0.01
                     }
