@@ -8,10 +8,10 @@
     <script src="https://s-yukisato.github.io/lesson4/OrbitControls.js"></script>
     <script>
         window.addEventListener('load', init);
+        // 自動カメラ移動を止める
+        let control = false
 
-        function init() {
-            // 自動カメラ移動を止める
-            let control = false
+        function init(control) {
             // サイズを指定
             const width = 960;
             const height = 540;
@@ -163,7 +163,8 @@
             }
 
             // new THREE.PointLight(色, 光の強さ, 距離, 光の減衰率)
-            const pointLight = new THREE.PointLight(0xFFFFFF, 2, 50, 1.0);
+            let pointLight = new THREE.PointLight(0x00FF00, 2, 50, 1.0);
+            pointLight.position.set(0, 200, -700)
             scene.add(pointLight);
 
             light(100, 100, 100)
@@ -187,10 +188,11 @@
                 requestAnimationFrame(update);
 
                 // 箱を回転させる
-                if(camera.rotation.y < -1.0){
+                if (camera.rotation.y < -1.0) {
                     wall.position.z += 3
                 }
                 else if (camera.position.z < -400) {
+                    camera.position.x += 0.01
                     camera.rotation.y -= 0.005
                     camera.rotation.x += 0.002
                 } else if (front.position.x > 400) {
@@ -206,14 +208,14 @@
                     if (camera.rotation.x > 0.03) {
                         front.position.x += 3
                         front.rotation.y -= 0.01
-                    }else {
+                    } else {
                         camera.rotation.x += 0.005
                     }
                 } else camera.position.z -= 3
 
                 renderer.render(scene, camera);
             };
-            if(!control) update()
+            if (!control) update()
 
             tick();
             // 毎フレーム時に実行されるループイベントです
