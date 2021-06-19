@@ -198,6 +198,16 @@
             // const bgTexture = textureLoader.load("https://s-yukisato.github.io/img/sky_00165.jpg")
             // scene.background = bgTexture
 
+            tick();
+            // 毎フレーム時に実行されるループイベントです
+            function tick() {
+                // カメラ一時停止
+                control = true
+                // レンダリング
+                renderer.render(scene, camera);
+                requestAnimationFrame(tick);
+            }
+
             // 初回実行
             var update = function () {
                 requestAnimationFrame(update);
@@ -209,7 +219,7 @@
                     ball.rotation.x += 0.03
                     ball.position.z += 3
                     ball.position.y -= 2
-                } else{
+                } else {
                     ball.rotation.x += 0.05
                     ball.position.z += 5
                 }
@@ -223,9 +233,12 @@
                     camera.rotation.y -= 0.005
                     camera.rotation.x += 0.001
                 } else if (front.position.x > 400) {
-                    if(ball.position.z < 400) {
+                    if (ball.position.z < 500) {
+                        camera.rotation.x -= 0.003
                         camera.position.z += 3
-                    }else if (camera.position.y < 400) {
+                    } else if (camera.position.z < 600) {
+                        camera.position.z += 3
+                    } else if (camera.position.y < 400) {
                         camera.rotation.x -= 0.005
                         camera.position.y += 2
                         camera.position.z -= 2
@@ -244,17 +257,7 @@
 
                 renderer.render(scene, camera);
             };
-            if(!control) update()
-
-            tick();
-            // 毎フレーム時に実行されるループイベントです
-            function tick() {
-                // カメラ一時停止
-                control = true
-                // レンダリング
-                renderer.render(scene, camera);
-                requestAnimationFrame(tick);
-            }
+            if (!control) update()
         }
 
         function createPlane(mat, width = 400, height = 400, color = 0xcccccc) {
