@@ -91,6 +91,7 @@
             // 正面壁
             let front = createWall(mat2, 0, 0, 200, -200)
             scene.add(front)
+            scene.add(createWall(mat2, 0, 0, 350, -800))
             // 左壁
             scene.add(createWall(mat2, 0.5, -200, 350, -800))
             scene.add(createWall(mat2, 0.5, -200, 350, -400))
@@ -99,6 +100,9 @@
             scene.add(createWall(mat2, 0.5, -200, 200, 400))
             scene.add(createWall(mat2, 0.5, -200, 200, 800))
             // 右回転
+            scene.add(createWall(mat2, -0.5, 200, 350, -800))
+            scene.add(createWall(mat2, -0.5, 200, 350, -400))
+
             scene.add(createWall(mat2, -0.5, 200, 200, 0))
             scene.add(createWall(mat2, -0.5, 200, 200, 400))
             scene.add(createWall(mat2, -0.5, 200, 200, 800))
@@ -175,16 +179,17 @@
 
                 // 箱を回転させる
                 if (camera.position.z < -400){
-
+                    camera.lookAt(0)
                 }else if (front.position.x > 400) {
                     if (camera.position.y < 400) {
-                        camera.position.y += 3
-                        camera.position.z -= 3
+                        camera.position.y += 2
+                        camera.position.z -= 2
                     } else {
                         camera.position.z -= 3
                     }
                 }
                 else if (camera.position.z < 500) {
+                    camera.rotation.y += 0.1
                     front.position.x += 3
                     front.rotation.y -= 0.01
                 } else camera.position.z -= 3
