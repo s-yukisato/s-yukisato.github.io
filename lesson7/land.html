@@ -8,10 +8,11 @@
     <script src="https://s-yukisato.github.io/lesson4/OrbitControls.js"></script>
     <script>
         window.addEventListener('load', init);
-        // 自動カメラ移動を止める
-        let control = false
 
         function init() {
+            // 自動カメラ移動を止める
+            let control = false
+
             // サイズを指定
             const width = 960;
             const height = 540;
@@ -201,23 +202,23 @@
             var update = function () {
                 requestAnimationFrame(update);
 
-                if(ball.position.z < 0) {
+                if (ball.position.z < 0) {
                     ball.rotation.x += 0.02
                     ball.position.z += 3
-                }else if(ball.position.z < 200){
+                } else if (ball.position.z < 200) {
                     ball.rotation.x += 0.03
                     ball.position.z += 3
                     ball.position.y -= 2
                 }
 
-                if (camera.rotation.y < -1.25) {
+                if (camera.rotation.y < -1.15) {
                     wall.position.z += 3
-                    wall.opacity-=0.1
+                    wall.opacity -= 0.1
                 }
                 else if (camera.position.z < -600) {
                     camera.position.x += 0.1
                     camera.rotation.y -= 0.005
-                    camera.rotation.x += 0.002
+                    camera.rotation.x += 0.001
                 } else if (front.position.x > 400) {
                     if (camera.position.y < 400) {
                         camera.rotation.x -= 0.005
@@ -238,11 +239,13 @@
 
                 renderer.render(scene, camera);
             };
-            update()
+            if(!control) update()
 
             tick();
             // 毎フレーム時に実行されるループイベントです
             function tick() {
+                // カメラ一時停止
+                control = true
                 // レンダリング
                 renderer.render(scene, camera);
                 requestAnimationFrame(tick);
