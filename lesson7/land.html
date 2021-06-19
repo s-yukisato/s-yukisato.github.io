@@ -152,10 +152,10 @@
             mat_b.normalMap = normal;
             mat_b.normalScale = new THREE.Vector2( 1, -1)
 
-            // 地球を作成(原点に作成)
+            // 球を作成(原点に作成)
             var geometry = new THREE.SphereGeometry(200, 32, 32);
             var ball = new THREE.Mesh(geometry, mat_b);
-            ball.position.set(0, 200, -500)
+            ball.position.set(0, 350, -500)
             scene.add(ball);
 
 
@@ -201,7 +201,7 @@
             var update = function () {
                 requestAnimationFrame(update);
 
-                if(ball.position.z > 500) {
+                if(ball.position.z < 500) {
                     ball.rotation.z += 0.03
                     ball.position.z += 3
                 }
