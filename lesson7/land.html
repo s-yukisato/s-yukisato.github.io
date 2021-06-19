@@ -187,7 +187,7 @@
             }
 
             light(100, 100, 100)
-            // light(-100, 100, 100)
+            light(-100, 100, 100)
             light(100, -100, -100)
             // light(-100, -100, -100)
 
@@ -223,9 +223,9 @@
                     wall.position.z += 3
                 } else if (camera.position.z < -600) {
                     camera.rotation.y -= 0.005
-                    camera.position.z -= 2
+                    camera.rotation.z -= 0.001
                 } else if (front.position.x > 400) {
-                    if (ball.position.z < 700) {
+                    if (ball.position.z < 400) {
                         camera.position.z += 5
                     } else if (ball.position.z < 1100) {
                         camera.position.z -= 3
