@@ -143,11 +143,11 @@
             // // 箱を作成(原点に作成)
             var geometry = new THREE.BoxGeometry(50, 50, 50);
 
-            for (let z= 125; z <= 225; z += 50) {
+            for (let z = 125; z <= 225; z += 50) {
                 let y = 0;
-                if(z == 125) y = 125
-                else if(z == 175) y = 75
-                else if(z == 225) y = 25
+                if (z == 125) y = 125
+                else if (z == 175) y = 75
+                else if (z == 225) y = 25
                 for (let x = -175; x <= 175; x += 50) {
                     var box = new THREE.Mesh(geometry, mat_s)
                     box.position.x = x
@@ -182,9 +182,9 @@
                 requestAnimationFrame(update);
 
                 // 箱を回転させる
-                if (camera.position.z < -400){
+                if (camera.position.z < -400) {
 
-                }else if (front.position.x > 400) {
+                } else if (front.position.x > 400) {
                     if (camera.position.y < 400) {
                         camera.rotation.x -= 0.005
                         camera.position.y += 2
@@ -194,9 +194,11 @@
                     }
                 }
                 else if (camera.position.z < 500) {
+                    if (camera.rotation.x > 1) {
+                        front.position.x += 3
+                        front.rotation.y -= 0.01
+                    }
                     camera.rotation.x += 0.005
-                    front.position.x += 3
-                    front.rotation.y -= 0.01
                 } else camera.position.z -= 3
 
                 renderer.render(scene, camera);
