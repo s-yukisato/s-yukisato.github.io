@@ -28,6 +28,7 @@
             const camera = new THREE.PerspectiveCamera(45, width / height);
             // カメラの初期座標を設定
             camera.position.set(0, 50, 1000);
+            camera.rotation.y = 50;
 
             // カメラコントローラーを作成
             const controls = new THREE.OrbitControls(camera, document.body);
@@ -82,8 +83,7 @@
             // 床
             scene.add(createFloor(mat1, 0, 150, -900))
             scene.add(createFloor(mat1, 0, 150, -500))
-
-            scene.add(createFloor(mat, 0, 150, -200))
+            scene.add(createFloor(mat1, 0, 150, -100))
             scene.add(createFloor(mat, 0, 0, 400))
             scene.add(createFloor(mat, 0, 0, 800))
             scene.add(createFloor(mat, 0, 0, 1200))
@@ -111,8 +111,8 @@
 
             const sprite = new THREE.Sprite(material0);
             sprite.position.x = 0;
-            sprite.position.y = 50;
-            sprite.position.z = 0;
+            sprite.position.y = 200;
+            sprite.position.z = -400;
             sprite.scale.set(100, 100, 100);
             scene.add(sprite);
 
@@ -134,7 +134,7 @@
 
 
             // // 箱を作成(原点に作成)
-            var geometry = new THREE.BoxGeometry(400, 50, 50);
+            var geometry = new THREE.BoxGeometry(50, 50, 50);
 
 
             var box = new THREE.Mesh(geometry, mat_s)
@@ -190,15 +190,14 @@
                         camera.position.z -= 3
                     }
                 }
-                else if (camera.position.z < 400) {
+                else if (camera.position.z < 500) {
                     front.position.x += 3
                     front.rotation.y -= 0.01
                 } else camera.position.z -= 3
 
-
                 renderer.render(scene, camera);
             };
-            if(camera.position.z > -600){
+            if(camera.position.z < -600){
                 update();
             }
 
