@@ -231,13 +231,14 @@
                     camera.rotation.y -= 0.005
                     camera.rotation.x += 0.001
                 } else if (front.position.x > 400) {
+                    
                     if (camera.position.y < 400) {
                         camera.rotation.x -= 0.005
                         camera.position.y += 2
                         camera.position.z -= 2
                     } else {
                         camera.position.z -= 3
-                        camera.rotation.x += 0.001
+                        camera.rotation.x += 0.005
                     }
                 }
                 else if (camera.position.z < 600) {
