@@ -135,7 +135,7 @@
 
             const sprite = new THREE.Sprite(material0);
             sprite.position.x = 450;
-            sprite.position.y = 250;
+            sprite.position.y = 240;
             sprite.position.z = -800;
             sprite.scale.set(200, 200, 200);
             scene.add(sprite);
@@ -150,10 +150,10 @@
                 sprite_light.scale.set(200, 200, 200);
                 return sprite_light
             }
-            scene.add(strite_light(-200, 250, -100));
-            scene.add(strite_light(200, 250, -100));
-            scene.add(strite_light(-200, 250, -300));
-            scene.add(strite_light(200, 250, -300));
+            scene.add(strite_light(-200, 240, -100));
+            scene.add(strite_light(200, 240, -100));
+            scene.add(strite_light(-200, 240, -300));
+            scene.add(strite_light(200, 240, -300));
 
             let texture_ = textureLoader.load("https://s-yukisato.github.io/img/stone.jpg")
             let mat_ = new THREE.MeshPhongMaterial();
@@ -239,7 +239,7 @@
                     ball.position.y -= 10
                 }
 
-                if (camera.rotation.y < -1.15) {
+                if (camera.rotation.y < -1.10) {
                     // wall.position.z += 3
                 } else if (camera.position.z < -600) {
                     camera.rotation.y -= 0.005
