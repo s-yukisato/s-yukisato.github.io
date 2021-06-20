@@ -132,7 +132,7 @@
             const material0 = new THREE.SpriteMaterial({ map: texture0, });
 
             const sprite = new THREE.Sprite(material0);
-            sprite.position.x = 300;
+            sprite.position.x = 400;
             sprite.position.y = 200;
             sprite.position.z = -700;
             sprite.scale.set(100, 100, 100);
@@ -187,7 +187,7 @@
             }
 
             light(100, 100, 100)
-            // light(-100, 100, 100)
+            light(-100, 100, 100)
             light(100, -100, -100)
             light(-100, -100, -100)
 
@@ -218,8 +218,8 @@
                     ball.rotation.x += 0.05
                     ball.position.z += 5
                 } else {
-                    ball.rotation.x += 0.1
-                    ball.position.y += 10
+                    ball.rotation.x += 0.5
+                    ball.position.x += 30
                 }
 
                 if (camera.rotation.y < -1.15) {
@@ -227,10 +227,10 @@
                 } else if (camera.position.z < -600) {
                     camera.rotation.y -= 0.005
                     camera.rotation.z -= 0.001
-                } else if (front.position.x > 350) {
-                    if (ball.position.z < 350) {
+                } else if (front.position.x > 400) {
+                    if (ball.position.z < 300) {
                         camera.position.z += 5
-                    } else if (ball.position.y < 600) {
+                    } else if (ball.position.x < 1200) {
                         camera.position.z -= 3
                     } else if (camera.position.y < 300) {
                         camera.rotation.x -= 0.005
