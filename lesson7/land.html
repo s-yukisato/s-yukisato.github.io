@@ -129,7 +129,7 @@
 
             // 宝箱をスプライトで作成
             var texture0 = textureLoader.load("https://s-yukisato.github.io/img/silver_treasure_illust_1995.png");
-            const material0 = new THREE.SpriteMaterial({ map: texture0, });
+            const material0 = new THREE.SpriteMaterial({ map: texture0 });
 
             const sprite = new THREE.Sprite(material0);
             sprite.position.x = 400;
@@ -137,6 +137,21 @@
             sprite.position.z = -700;
             sprite.scale.set(100, 100, 100);
             scene.add(sprite);
+
+            // 街灯をスプライトで作成
+            var texture1 = textureLoader.load("https://s-yukisato.github.io/img/light.png");
+            const material1 = new THREE.SpriteMaterial({ map: texture1 });
+
+            function strite_light(x, y, z) {
+                const sprite_light = new THREE.Sprite(material1);
+                sprite_light.position.set(x, y, z)
+                sprite_light.scale.set(100, 100, 100);
+                return sprite_light
+            }
+            scene.add(strite_light(-200, 200, -100));
+            scene.add(strite_light(200, 200, -100));
+            scene.add(strite_light(-200, 200, -300));
+            scene.add(strite_light(200, 200, -300));
 
             let texture_ = textureLoader.load("https://s-yukisato.github.io/img/stone.jpg")
             let mat_ = new THREE.MeshPhongMaterial();
@@ -251,7 +266,7 @@
 
                 renderer.render(scene, camera);
             };
-            if(automation) update()
+            if (automation) update()
 
             tick();
             // 毎フレーム時に実行されるループイベントです
@@ -287,7 +302,7 @@
             plane.position.z = p_z;
             return plane
         }
-        
+
     </script>
 </head>
 
