@@ -139,11 +139,11 @@
             scene.add(sprite);
 
             // 街灯をスプライトで作成
-            var texture1 = textureLoader.load("https://s-yukisato.github.io/img/light.png");
-            const material1 = new THREE.SpriteMaterial({ map: texture1 });
+            var texture_light = textureLoader.load("https://s-yukisato.github.io/img/light.png");
+            const material_light = new THREE.SpriteMaterial({ map: texture_light });
 
             function strite_light(x, y, z) {
-                const sprite_light = new THREE.Sprite(material1);
+                const sprite_light = new THREE.Sprite(material_light);
                 sprite_light.position.set(x, y, z)
                 sprite_light.scale.set(100, 100, 100);
                 return sprite_light
