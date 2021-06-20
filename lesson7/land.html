@@ -8,9 +8,8 @@
     <script src="https://s-yukisato.github.io/lesson4/OrbitControls.js"></script>
     <script>
         window.addEventListener('load', init);
-
-        function init() {
-            let automation = true;
+        let automation = true;
+        function init(automation) {
 
             // サイズを指定
             const width = 960;
@@ -119,7 +118,7 @@
             scene.add(createWall(mat_w, 0.5, -200, 200, 800))
             // 右回転
             scene.add(createWall(mat2, -0.5, 600, 350, -800))
-            let wall = createWall(mat2, -0.5, 200, 350, -800)
+            let wall = createWall(mat2, -0.5, 210, 350, -800)
             scene.add(wall)
             scene.add(createWall(mat2, -0.5, 200, 350, -400))
 
@@ -186,9 +185,6 @@
                     scene.add(box)
                 }
             }
-            let mesh = createBane("solid")
-            mesh.position.set(0, 0, -500)
-            scene.add(mesh);
 
             light(100, 100, 100)
             light(-100, 100, 100)
@@ -232,9 +228,9 @@
                     camera.rotation.y -= 0.005
                     camera.rotation.z -= 0.001
                 } else if (front.position.x > 400) {
-                    if (ball.position.z < 300) {
+                    if (ball.position.z < 350) {
                         camera.position.z += 5
-                    } else if (ball.position.y > -1200) {
+                    } else if (ball.position.y > -1400) {
                         camera.position.z -= 3
                     } else if (camera.position.y < 300) {
                         camera.rotation.x -= 0.005
