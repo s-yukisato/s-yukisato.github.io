@@ -25,6 +25,8 @@
             // シーンを作成
             const scene = new THREE.Scene();
 
+            scene.fog = new THREE.Fog(0x000000, 50, 2000);
+
             // カメラを作成
             const camera = new THREE.PerspectiveCamera(60, width / height);
             // カメラの初期座標を設定
@@ -229,7 +231,7 @@
                     ball.rotation.x += 0.03
                     ball.position.z += 3
                     ball.position.y -= 2
-                } else if (ball.position.z < 500) {
+                } else if (ball.position.z < 450) {
                     ball.rotation.x += 0.05
                     ball.position.z += 5
                 } else {
@@ -245,7 +247,7 @@
                 } else if (front.position.x > 400) {
                     if (ball.position.z < 320) {
                         camera.position.z += 5
-                    } else if (ball.position.y > -1400) {
+                    } else if (ball.position.y > -1500) {
                         camera.position.z -= 3
                     } else if (camera.position.y < 300) {
                         camera.rotation.x -= 0.005
