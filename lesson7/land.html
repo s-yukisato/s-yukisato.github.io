@@ -10,6 +10,7 @@
         window.addEventListener('load', init);
 
         function init() {
+            let automation = true;
 
             // サイズを指定
             const width = 960;
@@ -221,6 +222,7 @@
                     ball.rotation.x += 0.05
                     ball.position.z += 5
                 } else {
+                    ball.rotation.x += 0.05
                     ball.position.y -= 10
                 }
 
@@ -232,7 +234,7 @@
                 } else if (front.position.x > 400) {
                     if (ball.position.z < 300) {
                         camera.position.z += 5
-                    } else if (ball.position.y > -1000) {
+                    } else if (ball.position.y > -1200) {
                         camera.position.z -= 3
                     } else if (camera.position.y < 300) {
                         camera.rotation.x -= 0.005
@@ -253,7 +255,7 @@
 
                 renderer.render(scene, camera);
             };
-            update()
+            if(automation) update()
 
             tick();
             // 毎フレーム時に実行されるループイベントです
