@@ -219,7 +219,7 @@
                     ball.position.z += 5
                 } else {
                     ball.rotation.x += 0.5
-                    ball.position.x += 30
+                    ball.opacity-=0.1
                 }
 
                 if (camera.rotation.y < -1.15) {
@@ -230,7 +230,7 @@
                 } else if (front.position.x > 400) {
                     if (ball.position.z < 300) {
                         camera.position.z += 5
-                    } else if (ball.position.x < 1200) {
+                    } else if (ball.opacity < 0) {
                         camera.position.z -= 3
                     } else if (camera.position.y < 300) {
                         camera.rotation.x -= 0.005
