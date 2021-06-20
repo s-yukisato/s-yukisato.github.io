@@ -51,7 +51,7 @@
             // bump
             let bump = textureLoader.load('https://s-yukisato.github.io/img/ground-bump.jpg');
             mat.bumpMap = bump;
-            mat.bumpScale = 0.3;
+            mat.bumpScale = 0.4;
 
             // 地面用2
             let texture1 = textureLoader.load("https://s-yukisato.github.io/img/tone.jpg")
@@ -60,7 +60,7 @@
             // bump
             let bump1 = textureLoader.load('https://s-yukisato.github.io/img/tone-bump.jpg');
             mat1.bumpMap = bump1;
-            mat1.bumpScale = 0.3;
+            mat1.bumpScale = 0.4;
 
             let texture2 = textureLoader.load("https://s-yukisato.github.io/img/brick.jpg")
             let mat2 = new THREE.MeshPhongMaterial();
@@ -68,14 +68,14 @@
             // bump
             let bump2 = textureLoader.load('https://s-yukisato.github.io/img/brick-bump.jpg');
             mat2.bumpMap = bump2;
-            mat2.bumpScale = 0.3;
+            mat2.bumpScale = 0.4;
 
             // 階段用
-            let texture_stairs = textureLoader.load("https://s-yukisato.github.io/img/stone.jpg")
+            let texture_stairs = textureLoader.load("https://s-yukisato.github.io/img/concrete.jpg")
             let mat_s = new THREE.MeshPhongMaterial();
             mat_s.map = texture_stairs;
             // bump
-            let bump_stairs = textureLoader.load('https://s-yukisato.github.io/img/stone-bump.jpg');
+            let bump_stairs = textureLoader.load('https://s-yukisato.github.io/img/concrete-bump.jpg');
             mat_s.bumpMap = bump_stairs;
             mat_s.bumpScale = 0.3;
 
@@ -135,7 +135,7 @@
 
             const sprite = new THREE.Sprite(material0);
             sprite.position.x = 450;
-            sprite.position.y = 300;
+            sprite.position.y = 250;
             sprite.position.z = -800;
             sprite.scale.set(200, 200, 200);
             scene.add(sprite);
@@ -150,10 +150,10 @@
                 sprite_light.scale.set(200, 200, 200);
                 return sprite_light
             }
-            scene.add(strite_light(-200, 300, -100));
-            scene.add(strite_light(200, 300, -100));
-            scene.add(strite_light(-200, 300, -300));
-            scene.add(strite_light(200, 300, -300));
+            scene.add(strite_light(-200, 250, -100));
+            scene.add(strite_light(200, 250, -100));
+            scene.add(strite_light(-200, 250, -300));
+            scene.add(strite_light(200, 250, -300));
 
             let texture_ = textureLoader.load("https://s-yukisato.github.io/img/stone.jpg")
             let mat_ = new THREE.MeshPhongMaterial();
