@@ -228,7 +228,7 @@
                     camera.rotation.y -= 0.005
                     camera.rotation.z -= 0.001
                 } else if (front.position.x > 400) {
-                    if (ball.position.z < 350) {
+                    if (ball.position.z < 320) {
                         camera.position.z += 5
                     } else if (ball.position.y > -1400) {
                         camera.position.z -= 3
@@ -287,85 +287,7 @@
             plane.position.z = p_z;
             return plane
         }
-        function createBane(type) {
-            var geometry = new THREE.Geometry();
-            var zoukaY = 0.0025;// 1°ごとのy軸の増加
-            var laps = 8;// 何周するか
-            var split = 10;// 何度ずつ頂点を置くか
-            var radius = 2;// 円の半径
-            var totalDeg = laps * 360;//全周分の角度
-
-            if (type == "line") {
-                for (var i = 0; i <= totalDeg; i = i + split) {
-                    var x = radius * Math.cos(Math.PI / 180 * i);
-                    var z = radius * Math.sin(Math.PI / 180 * i);
-                    var y = i * zoukaY;
-                    geometry.vertices.push(new THREE.Vector3(x, y, z));
-                }
-                var line = new THREE.LineBasicMaterial({ color: 0xFCB64F });
-                var mesh = new THREE.Line(geometry, line);
-            } else if (type == "plane") {
-                var outRadius = 3; //外側の円半径
-                for (var i = 0; i <= totalDeg; i = i + split) {
-                    var x = radius * Math.cos(Math.PI / 180 * i);
-                    var z = radius * Math.sin(Math.PI / 180 * i);
-                    var _x = outRadius * Math.cos(Math.PI / 180 * i);
-                    var _z = outRadius * Math.sin(Math.PI / 180 * i);
-                    var y = i * zoukaY;
-                    geometry.vertices.push(new THREE.Vector3(x, y, z));
-                    geometry.vertices.push(new THREE.Vector3(_x, y, _z));
-                }
-                var length = geometry.vertices.length;
-                for (var i = 0; i < length - 3; i = i + 2) {
-                    geometry.faces.push(new THREE.Face3(i + 2, i + 1, i));
-                    geometry.faces.push(new THREE.Face3(i + 3, i + 1, i + 2));
-                }
-                geometry.computeFaceNormals();
-                var material = new THREE.MeshPhongMaterial({ color: 0xFCB64F });
-                var mesh = new THREE.Mesh(geometry, material);
-            } else if (type == "solid") {
-                var tickness = 0.5; // 切断面の太さ
-                var v = 20;　//切断面(多角形)の頂点数
-                var surfaceSplit = 360 / v;　//切断面(多角形)の中心角
-                //全周分の角度の分ループ
-                for (var i = 0; i <= totalDeg; i = i + split) {
-                    //切断面の頂点数分ループ
-                    for (var j = 0; j < v; j++) {
-                        //　頂点jの切断面の太さ分のバネ半径x,z値の増加
-                        var increase = tickness / 2 * Math.sin(Math.PI / 180 * (surfaceSplit * j));
-                        //　頂点jの切断面の太さ分のバネ半径y値の増加
-                        var increaseY = tickness / 2 * Math.cos(Math.PI / 180 * (surfaceSplit * j));
-                        var x = (radius + increase) * Math.cos(Math.PI / 180 * i);
-                        var z = (radius + increase) * Math.sin(Math.PI / 180 * i);
-                        var y = (i * zoukaY) + increaseY;
-                        geometry.vertices.push(new THREE.Vector3(x, y, z));
-                    }
-                }
-                var verLen = geometry.vertices.length;//頂点の数
-                //切断面の数だけループ
-                for (var i = 0; i < (verLen / v) - 1; i++) {
-                    //切断面の頂点数分ループ
-                    for (var j = 0; j < v; j++) {
-                        //現在:i切断面目のｊ番目頂点
-                        //(次の切断面のj番目頂点,i番目切断面の次の頂点,i番目切断面のj番目の頂点)
-                        geometry.faces.push(new THREE.Face3((i + 1) * v + j, i * v + j + 1, i * v + j))
-                        //最後のループ時は面を作らない
-                        //(次の切断面の次の頂点,i番目切断面の次の頂点,次の切断面のj番目の頂点)
-                        if (i != (verLen / v) - 2 || j != v - 1) geometry.faces.push(new THREE.Face3((i + 1) * v + j + 1, i * v + j + 1, (i + 1) * v + j));
-                    }
-                }
-                geometry.computeFaceNormals();//法線ベクトル(面の向き)自動計算
-                geometry.computeVertexNormals();//法線ベクトル(面の向き)自動計算
-                var material = new THREE.MeshPhongMaterial({
-                    color: 0xFCB64F,
-                    specular: 0xFCCC8C,
-                    shininess: 15,
-                    side: THREE.DoubleSide
-                });
-                var mesh = new THREE.Mesh(geometry, material);
-            }
-            return mesh;
-        }
+        
     </script>
 </head>
 
