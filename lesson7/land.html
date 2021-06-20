@@ -186,7 +186,8 @@
                 }
             }
             let mesh = createBane("solid")
-            mesh.position.set(0, 0, -300)
+            mesh.position.set(0, 0, -500)
+            mesh.scale(100, 100, 100)
             scene.add(mesh);
 
             light(100, 100, 100)
@@ -221,8 +222,7 @@
                     ball.rotation.x += 0.05
                     ball.position.z += 5
                 } else {
-                    ball.rotation.x += 0.5
-                    ball.opacity -= 0.1
+                    ball.opacity -= 0.005
                 }
 
                 if (camera.rotation.y < -1.15) {
