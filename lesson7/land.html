@@ -8,8 +8,7 @@
     <script src="https://s-yukisato.github.io/lesson4/OrbitControls.js"></script>
     <script>
         window.addEventListener('load', init);
-        let automation = true;
-        function init(automation) {
+        function init() {
 
             // サイズを指定
             const width = 960;
@@ -20,7 +19,6 @@
                 canvas: document.querySelector('#myCanvas'),
             });
             renderer.setSize(width, height);
-            // renderer.setClearColor(0xc0c0c0);
 
             // シーンを作成
             const scene = new THREE.Scene();
@@ -34,13 +32,8 @@
 
             // カメラコントローラーを作成
             const controls = new THREE.OrbitControls(camera, document.body);
+            controls.maxPolarAngle = Math.PI / 2.2;
 
-            // helper
-            // const gridHelper = new THREE.GridHelper(200, 50); // size, step
-            // scene.add(gridHelper);
-
-            // const axisHelper = new THREE.AxisHelper(200, 50);
-            // scene.add(axisHelper);
 
             // テクスチャー読み込み
             var textureLoader = new THREE.TextureLoader();
@@ -159,17 +152,6 @@
             let mat_ = new THREE.MeshPhongMaterial();
             mat_.map = texture_;
 
-            let radiusTop = 250; //上面の半径です。0にすると円錐になります。
-            let radiusBottom = 250; //底面の半径です。
-            let objHeight = 50; //高さです。
-            let radiusSegments = 0; //円周の分割数です。
-            let heightSegments = 0; //高さの分割数です。
-            let openEnded = true; //true：フタをしない,false：フタをする
-
-            // const geometry_ = new THREE.CylinderGeometry(radiusTop, radiusBottom, objHeight, radiusSegments, heightSegments, openEnded)
-            // const cylinder = new THREE.Mesh(geometry_, mat_);
-            // scene.add(cylinder);
-
             var texture_block = textureLoader.load('https://s-yukisato.github.io/img/block.jpg');
             var mat_b = new THREE.MeshPhongMaterial();
             mat_b.map = texture_block;
@@ -223,60 +205,56 @@
             // 初回実行
             var update = function () {
                 requestAnimationFrame(update);
+                // orbitcontrols使ったらアニメーション停止
+                if (camera.position.x != 0) {
 
-                if (ball.position.z < 100) {
-                    ball.rotation.x += 0.02
-                    ball.position.z += 3
-                } else if (ball.position.z < 300) {
-                    ball.rotation.x += 0.03
-                    ball.position.z += 3
-                    ball.position.y -= 2
-                } else if (ball.position.z < 450) {
-                    ball.rotation.x += 0.05
-                    ball.position.z += 5
                 } else {
-                    ball.rotation.x += 0.05
-                    ball.position.y -= 10
-                }
+                    if (ball.position.z < 100) {
+                        ball.rotation.x += 0.02
+                        ball.position.z += 3
+                    } else if (ball.position.z < 300) {
+                        ball.rotation.x += 0.03
+                        ball.position.z += 3
+                        ball.position.y -= 2
+                    } else if (ball.position.z < 450) {
+                        ball.rotation.x += 0.05
+                        ball.position.z += 5
+                    } else {
+                        ball.rotation.x += 0.05
+                        ball.position.y -= 10
+                    }
 
-                if (camera.rotation.y < -1.10) {
-                    // wall.position.z += 3
-                } else if (camera.position.z < -600) {
-                    camera.rotation.y -= 0.005
-                    camera.rotation.z -= 0.001
-                } else if (front.position.x > 400) {
-                    if (ball.position.z < 320) {
-                        camera.position.z += 5
-                    } else if (ball.position.y > -1500) {
-                        camera.position.z -= 3
-                    } else if (camera.position.y < 300) {
-                        camera.rotation.x -= 0.005
-                        camera.position.y += 2
-                        camera.position.z -= 2
-                    } else {
-                        camera.position.z -= 3
-                        // camera.rotation.x += 0.001
-                    }
-                } else if (camera.position.z < 600) {
-                    if (camera.rotation.x > 0.03) {
-                        front.position.x += 3
-                        front.rotation.y -= 0.01
-                    } else {
-                        camera.rotation.x += 0.005
-                    }
-                } else camera.position.z -= 3
+                    if (camera.rotation.y < -1.10) {
+                        // wall.position.z += 3
+                    } else if (camera.position.z < -600) {
+                        camera.rotation.y -= 0.005
+                        camera.rotation.z -= 0.001
+                    } else if (front.position.x > 400) {
+                        if (ball.position.z < 320) {
+                            camera.position.z += 5
+                        } else if (ball.position.y > -1500) {
+                            camera.position.z -= 3
+                        } else if (camera.position.y < 300) {
+                            camera.rotation.x -= 0.005
+                            camera.position.y += 2
+                            camera.position.z -= 2
+                        } else {
+                            camera.position.z -= 3
+                            // camera.rotation.x += 0.001
+                        }
+                    } else if (camera.position.z < 600) {
+                        if (camera.rotation.x > 0.03) {
+                            front.position.x += 3
+                            front.rotation.y -= 0.01
+                        } else {
+                            camera.rotation.x += 0.005
+                        }
+                    } else camera.position.z -= 3
+                }
 
                 renderer.render(scene, camera);
             };
-            if (automation) update()
-
-            tick();
-            // 毎フレーム時に実行されるループイベントです
-            function tick() {
-                // レンダリング
-                renderer.render(scene, camera);
-                requestAnimationFrame(tick);
-            }
+            update()
         }
 
         function createPlane(mat, width = 400, height = 400, color = 0xcccccc) {
